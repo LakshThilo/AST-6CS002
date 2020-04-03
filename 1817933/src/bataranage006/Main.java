@@ -41,10 +41,7 @@ public class Main {
     //IOSpecialist specialist = new IOSpecialist();   // ------2
     specialist = new IOSpecialist();
 
-    System.out
-            .println("Welcome To Abominodo - The Best Dominoes Puzzle Game in the Universe");
-    System.out.println("Version 2.1 (c), Kevan Buckley, 2014");
-//    System.out.println("Serial number " + Special.getStamp());
+    displayWelcomeMessage();
 
     System.out.println();
     System.out.println(MultiLingualStringTable.getMessage(0));
@@ -599,6 +596,12 @@ public class Main {
 
     }
 
+  }
+
+  private void displayWelcomeMessage() {
+    System.out.println("Welcome To Abominodo - The Best Dominoes Puzzle Game in the Universe");
+    System.out.println("Version 2.1 (c), Kevan Buckley, 2014");
+//    System.out.println("Serial number " + Special.getStamp());
   }
 
   private void generateDominoes() {
