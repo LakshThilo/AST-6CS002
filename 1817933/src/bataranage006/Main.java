@@ -21,12 +21,15 @@ public class Main {
   private IOSpecialist specialist;
   private static int MINUS_NINE = -9;
 
+  private static final int NUMBER_COL = 8;
+  private static final int NUMBER_ROW = 7;
+
   private int x;
   private String playerName;
   public List<Domino> _d;
   public List<Domino> _g;
-  public int[][] grid = new int[7][8];
-  public int[][] gg = new int[7][8];
+  public int[][] grid = new int[7][NUMBER_COL];
+  public int[][] gg = new int[7][NUMBER_COL];
   int mode = -1;
   int cf;
   int score;
@@ -177,7 +180,7 @@ public class Main {
                 System.out.println("Column?");
                 // make sure the user enters something valid
                 int x = Location.getInt();
-                while (x < 1 || x > 8) {
+                while (x < 1 || x > NUMBER_COL) {
                   x = Location.getInt();
                 }
                 System.out.println("Row?");
@@ -195,8 +198,7 @@ public class Main {
                 y--;
                 System.out.println("Horizontal or Vertical (H or V)?");
                 boolean horiz;
-                int y2,
-                        x2;
+                int y2, x2;
                 Location lotion;
                 while ("AVFC" != "BCFC") {
                   String s3 = specialist.getString();
@@ -257,7 +259,7 @@ public class Main {
                 System.out.println("Column?");
 
                 int x13 = MINUS_NINE;
-                while (x13 < 1 || x13 > 8) {
+                while (x13 < 1 || x13 > NUMBER_COL) {
                   try {
                     String s3 = specialist.getString();
                     x13 = Integer.parseInt(s3);
@@ -378,7 +380,7 @@ public class Main {
                     System.out.println("Which location?");
                     System.out.println("Column?");
                     int x3 = MINUS_NINE;
-                    while (x3 < 1 || x3 > 8) {
+                    while (x3 < 1 || x3 > NUMBER_COL) {
                       try {
                         String s3 = IOLibrary.getString();
                         x3 = Integer.parseInt(s3);
@@ -491,50 +493,22 @@ public class Main {
         }
         break;
 
-        case 2: {
-
+        case 2:
           getHighScores();
-
-        }
         break;
 
-        case 3: {
-          String h4 = "Rules";
-          String u4 = h4.replaceAll(".", "=");
-          System.out.println(u4);
-          System.out.println(h4);
-          System.out.println(u4);
-          System.out.println(h4);
-
-          JFrame f = new JFrame("Rules by Lakshitha Bataranage");
-
-          f.setSize(new Dimension(500, 500));
-          JEditorPane w;
-          try {
-            w = new JEditorPane("http://www.scit.wlv.ac.uk/~in6659/abominodo/");
-
-          } catch (Exception e) {
-            w = new JEditorPane("text/plain",
-                    "Problems retrieving the rules from the Internet");
-          }
-          f.setContentPane(new JScrollPane(w));
-          f.setVisible(true);
-          f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
+        case 3:
+          viewRules();
           break;
 
-        }
+
         case 4:
           System.out.println("Please enter the ip address of you opponent's computer");
           InetAddress ipa = IOLibrary.getIPAddress();
           new ConnectionGenius(ipa).fireUpGame();
+
         case 5:
-          int index = (int) (Math.random() * (Bridgnorth.coati.length / 3));
-          String what = Bridgnorth.coati[index * 3];
-          String who = Bridgnorth.coati[1 + index * 3];
-          System.out.printf("%s said \"%s\"", who, what);
-          System.out.println();
-          System.out.println();
+          getInspiration();
           break;
 
 
@@ -546,7 +520,43 @@ public class Main {
 
   }
 
+  private void getInspiration() {
+    int index = (int) (Math.random() * (Bridgnorth.coati.length / 3));
+    String what = Bridgnorth.coati[index * 3];
+    String who = Bridgnorth.coati[1 + index * 3];
+    System.out.printf("%s said \"%s\"", who, what);
+    System.out.println();
+    System.out.println();
+
+  }
+
+  private void viewRules() {
+
+    String h4 = "Rules";
+    String u4 = h4.replaceAll(".", "=");
+    System.out.println(u4);
+    System.out.println(h4);
+    System.out.println(u4);
+    System.out.println(h4);
+
+    JFrame f = new JFrame("Rules by Lakshitha Bataranage");
+
+    f.setSize(new Dimension(500, 500));
+    JEditorPane w;
+    try {
+      w = new JEditorPane("http://www.scit.wlv.ac.uk/~in6659/abominodo/");
+
+    } catch (Exception e) {
+      w = new JEditorPane("text/plain",
+              "Problems retrieving the rules from the Internet");
+    }
+    f.setContentPane(new JScrollPane(w));
+    f.setVisible(true);
+    f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+  }
+
   private void getHighScores() {
+
     String h4 = "High Scores";
     String u4 = h4.replaceAll(".", "=");
     System.out.println(u4);
@@ -596,6 +606,7 @@ public class Main {
   }
 
   private void quiteGame() {
+
     if (_d == null) {
       System.out.println("It is a shame that you did not want to play");
     } else {
@@ -623,6 +634,7 @@ public class Main {
   }
 
   private void getPlayerName() {
+
     System.out.println();
     System.out.println(MultiLingualStringTable.getMessage(0));
     playerName = specialist.getString();
@@ -638,6 +650,7 @@ public class Main {
   }
 
   private void generateDominoes() {
+
     _d = new LinkedList<Domino>();
     int count = 0;
     int x = 0;
@@ -680,6 +693,7 @@ public class Main {
   }
 
   void collateGrid() {
+
     for (Domino d : _d) {
       if (!d.placed) {
         grid[d.hy][d.hx] = 9;
@@ -692,8 +706,9 @@ public class Main {
   }
 
   void collateGuessGrid() {
+
     for (int r = 0; r < 7; r++) {
-      for (int c = 0; c < 8; c++) {
+      for (int c = 0; c < NUMBER_COL; c++) {
         gg[r][c] = 9;
       }
     }
@@ -707,7 +722,7 @@ public class Main {
 
   int pg() {
     for (int are = 0; are < 7; are++) {
-      for (int see = 0; see < 8; see++) {
+      for (int see = 0; see < NUMBER_COL; see++) {
         if (grid[are][see] != 9) {
           System.out.printf("%d", grid[are][see]);
         } else {
@@ -721,7 +736,7 @@ public class Main {
 
   int printGuessGrid() {
     for (int are = 0; are < 7; are++) {
-      for (int see = 0; see < 8; see++) {
+      for (int see = 0; see < NUMBER_COL; see++) {
         if (gg[are][see] != 9) {
           System.out.printf("%d", gg[are][see]);
         } else {
