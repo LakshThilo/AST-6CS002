@@ -43,30 +43,15 @@ public class Main {
 
     displayWelcomeMessage();
 
-    System.out.println();
-    System.out.println(MultiLingualStringTable.getMessage(0));
-    playerName = specialist.getString();
+    getPlayerName();
 
-    System.out.printf("%s %s. %s", MultiLingualStringTable.getMessage(1),
-            playerName, MultiLingualStringTable.getMessage(2));
-
-  //  int constVal = MINUS_NINE;  // ----------------------------- 1
+    //  int constVal = MINUS_NINE;  // ----------------------------- 1
     CONST_VAL = MINUS_NINE;
-    while (CONST_VAL != ZERO) {
-      System.out.println();
-      String h1 = "Main menu";
-      String u1 = h1.replaceAll(".", "=");
-      System.out.println(u1);
-      System.out.println(h1);
-      System.out.println(u1);
 
-      System.out.println("1) Play");
-      // System.out.println("1) Single player play");
-      System.out.println("2) View high scores");
-      System.out.println("3) View rules");
-      // System.out.println("4) Multiplayer play");
-      System.out.println("5) Get inspiration");
-      System.out.println("0) Quit");
+    while (CONST_VAL != ZERO) {
+
+
+      displayMainMenu();
 
       CONST_VAL = MINUS_NINE;
       while (CONST_VAL == MINUS_NINE) {
@@ -596,6 +581,32 @@ public class Main {
 
     }
 
+  }
+
+  private void displayMainMenu() {
+    System.out.println();
+    String h1 = "Main menu";
+    String u1 = h1.replaceAll(".", "=");
+    System.out.println(u1);
+    System.out.println(h1);
+    System.out.println(u1);
+
+    System.out.println("1) Play");
+    // System.out.println("1) Single player play");
+    System.out.println("2) View high scores");
+    System.out.println("3) View rules");
+    // System.out.println("4) Multiplayer play");
+    System.out.println("5) Get inspiration");
+    System.out.println("0) Quit");
+  }
+
+  private void getPlayerName() {
+    System.out.println();
+    System.out.println(MultiLingualStringTable.getMessage(0));
+    playerName = specialist.getString();
+
+    System.out.printf("%s %s. %s", MultiLingualStringTable.getMessage(1),
+            playerName, MultiLingualStringTable.getMessage(2));
   }
 
   private void displayWelcomeMessage() {
