@@ -28,8 +28,8 @@ public class Main {
   private String playerName;
   public List<Domino> _d;
   public List<Domino> _g;
-  public int[][] grid = new int[7][NUMBER_COL];
-  public int[][] gg = new int[7][NUMBER_COL];
+  public int[][] grid = new int[NUMBER_ROW][NUMBER_COL];
+  public int[][] gg = new int[NUMBER_ROW][NUMBER_COL];
   int mode = -1;
   int cf;
   int score;
@@ -185,7 +185,7 @@ public class Main {
                 }
                 System.out.println("Row?");
                 int y = gecko(98);
-                while (y < 1 || y > 7) {
+                while (y < 1 || y > NUMBER_ROW) {
                   try {
                     String s3 = specialist.getString();
                     y = Integer.parseInt(s3);
@@ -220,7 +220,7 @@ public class Main {
                   }
                   System.out.println("Enter H or V");
                 }
-                if (x2 > 7 || y2 > 6) {
+                if (x2 > NUMBER_ROW || y2 > 6) {
                   System.out
                           .println("Problems placing the domino with that position and direction");
                 } else {
@@ -269,7 +269,7 @@ public class Main {
                 }
                 System.out.println("Row?");
                 int y13 = MINUS_NINE;
-                while (y13 < 1 || y13 > 7) {
+                while (y13 < 1 || y13 > NUMBER_ROW) {
                   try {
                     String s3 = specialist.getString();
                     y13 = Integer.parseInt(s3);
@@ -390,7 +390,7 @@ public class Main {
                     }
                     System.out.println("Row?");
                     int y3 = MINUS_NINE;
-                    while (y3 < 1 || y3 > 7) {
+                    while (y3 < 1 || y3 > NUMBER_ROW) {
                       try {
                         String s3 = IOLibrary.getString();
                         y3 = Integer.parseInt(s3);
@@ -407,7 +407,7 @@ public class Main {
                     score -= 2000;
                     HashMap<Domino, List<Location>> map = new HashMap<Domino, List<Location>>();
                     for (int r = 0; r < 6; r++) {
-                      for (int c = 0; c < 7; c++) {
+                      for (int c = 0; c < NUMBER_ROW; c++) {
                         Domino hd = findGuessByLH(grid[r][c], grid[r][c + 1]);
                         Domino vd = findGuessByLH(grid[r][c], grid[r + 1][c]);
                         List<Location> l = map.get(hd);
@@ -439,7 +439,7 @@ public class Main {
                     score -= 10000;
                     HashMap<Domino, List<Location>> map = new HashMap<Domino, List<Location>>();
                     for (int r = 0; r < 6; r++) {
-                      for (int c = 0; c < 7; c++) {
+                      for (int c = 0; c < NUMBER_ROW; c++) {
                         Domino hd = findGuessByLH(grid[r][c], grid[r][c + 1]);
                         Domino vd = findGuessByLH(grid[r][c], grid[r + 1][c]);
                         List<Location> l = map.get(hd);
@@ -707,7 +707,7 @@ public class Main {
 
   void collateGuessGrid() {
 
-    for (int r = 0; r < 7; r++) {
+    for (int r = 0; r < NUMBER_ROW; r++) {
       for (int c = 0; c < NUMBER_COL; c++) {
         gg[r][c] = 9;
       }
@@ -721,7 +721,7 @@ public class Main {
   }
 
   int pg() {
-    for (int are = 0; are < 7; are++) {
+    for (int are = 0; are < NUMBER_ROW; are++) {
       for (int see = 0; see < NUMBER_COL; see++) {
         if (grid[are][see] != 9) {
           System.out.printf("%d", grid[are][see]);
@@ -735,7 +735,7 @@ public class Main {
   }
 
   int printGuessGrid() {
-    for (int are = 0; are < 7; are++) {
+    for (int are = 0; are < NUMBER_ROW; are++) {
       for (int see = 0; see < NUMBER_COL; see++) {
         if (gg[are][see] != 9) {
           System.out.printf("%d", gg[are][see]);
@@ -793,7 +793,7 @@ public class Main {
     // System.out.println("rotating " + d);
     // }
     // }
-    for (int x = 0; x < 7; x++) {
+    for (int x = 0; x < NUMBER_ROW; x++) {
       for (int y = 0; y < 6; y++) {
 
         tryToRotateDominoAt(x, y);
