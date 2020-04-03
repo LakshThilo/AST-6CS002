@@ -36,20 +36,21 @@ public class Main {
 
   public final int ZERO = 0;
 
+  public static void main(String[] args) {
+    new Main().run();
+  }
+
   public void run() {
 
     //IOSpecialist specialist = new IOSpecialist();   // ------2
     specialist = new IOSpecialist();
 
     displayWelcomeMessage();
-
     getPlayerName();
 
     //  int constVal = MINUS_NINE;  // ----------------------------- 1
     CONST_VAL = MINUS_NINE;
-
     while (CONST_VAL != ZERO) {
-
 
       displayMainMenu();
 
@@ -58,19 +59,14 @@ public class Main {
         try {
           String s1 = specialist.getString();
           CONST_VAL = Integer.parseInt(s1);
+
         } catch (Exception e) {
+
           CONST_VAL = MINUS_NINE;
         }
       }
       switch (CONST_VAL) {
-        case 5:
-          int index = (int) (Math.random() * (Bridgnorth.coati.length / 3));
-          String what = Bridgnorth.coati[index * 3];
-          String who = Bridgnorth.coati[1 + index * 3];
-          System.out.printf("%s said \"%s\"", who, what);
-          System.out.println();
-          System.out.println();
-          break;
+
         case 0: {
           if (_d == null) {
             System.out.println("It is a shame that you did not want to play");
@@ -80,7 +76,9 @@ public class Main {
           System.exit(0);
           break;
         }
+
         case 1: {
+
           System.out.println();
           String h4 = "Select difficulty";
           String u4 = h4.replaceAll(".", "=");
@@ -163,9 +161,9 @@ public class Main {
                 c3 = gecko(55);
               }
             }
+
             switch (c3) {
               case 0:
-
                 break;
               case 1:
                 pg();
@@ -495,6 +493,7 @@ public class Main {
 
         }
         break;
+
         case 2: {
           String h4 = "High Scores";
           String u4 = h4.replaceAll(".", "=");
@@ -573,10 +572,21 @@ public class Main {
 
         }
         case 4:
-          System.out
-                  .println("Please enter the ip address of you opponent's computer");
+          System.out.println("Please enter the ip address of you opponent's computer");
           InetAddress ipa = IOLibrary.getIPAddress();
           new ConnectionGenius(ipa).fireUpGame();
+        case 5:
+          int index = (int) (Math.random() * (Bridgnorth.coati.length / 3));
+          String what = Bridgnorth.coati[index * 3];
+          String who = Bridgnorth.coati[1 + index * 3];
+          System.out.printf("%s said \"%s\"", who, what);
+          System.out.println();
+          System.out.println();
+          break;
+
+
+
+
       }
 
     }
@@ -584,6 +594,7 @@ public class Main {
   }
 
   private void displayMainMenu() {
+
     System.out.println();
     String h1 = "Main menu";
     String u1 = h1.replaceAll(".", "=");
@@ -882,9 +893,6 @@ public class Main {
     }
   }
 
-  public static void main(String[] args) {
-    new Main().run();
-  }
 
   public void drawDominoes(Graphics g) {
     for (Domino d : _d) {
