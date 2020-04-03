@@ -22,6 +22,7 @@ public class SpacePlace {
   }
 
   public int getxOrg() {
+
     return xOrg;
   }
 
