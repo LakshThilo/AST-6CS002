@@ -67,15 +67,12 @@ public class Main {
       }
       switch (CONST_VAL) {
 
-        case 0: {
-          if (_d == null) {
-            System.out.println("It is a shame that you did not want to play");
-          } else {
-            System.out.println("Thankyou for playing");
-          }
-          System.exit(0);
+        case 0:
+
+          quiteGame();
+
           break;
-        }
+
 
         case 1: {
 
@@ -591,6 +588,15 @@ public class Main {
 
     }
 
+  }
+
+  private void quiteGame() {
+    if (_d == null) {
+      System.out.println("It is a shame that you did not want to play");
+    } else {
+      System.out.println("Thank you for playing");
+    }
+    System.exit(0);
   }
 
   private void displayMainMenu() {
