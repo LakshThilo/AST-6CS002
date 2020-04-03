@@ -17,8 +17,9 @@ import javax.swing.JScrollPane;
 
 public class Main {
 
-  private static int CONST_VAL = -9;
+  private static int CONST_VAL;
   private IOSpecialist specialist;
+  private static int MINUS_NINE = -9;
 
   private int x;
   private String playerName;
@@ -52,7 +53,8 @@ public class Main {
     System.out.printf("%s %s. %s", MultiLingualStringTable.getMessage(1),
             playerName, MultiLingualStringTable.getMessage(2));
 
-  //  int constVal = -9;  // ----------------------------- 1
+  //  int constVal = MINUS_NINE;  // ----------------------------- 1
+    CONST_VAL = MINUS_NINE;
     while (CONST_VAL != ZERO) {
       System.out.println();
       String h1 = "Main menu";
@@ -69,13 +71,13 @@ public class Main {
       System.out.println("5) Get inspiration");
       System.out.println("0) Quit");
 
-      CONST_VAL = -9;
-      while (CONST_VAL == -9) {
+      CONST_VAL = MINUS_NINE;
+      while (CONST_VAL == MINUS_NINE) {
         try {
           String s1 = specialist.getString();
           CONST_VAL = Integer.parseInt(s1);
         } catch (Exception e) {
-          CONST_VAL = -9;
+          CONST_VAL = MINUS_NINE;
         }
       }
       switch (CONST_VAL) {
@@ -277,7 +279,7 @@ public class Main {
                 System.out.println("Enter a position that the domino occupies");
                 System.out.println("Column?");
 
-                int x13 = -9;
+                int x13 = MINUS_NINE;
                 while (x13 < 1 || x13 > 8) {
                   try {
                     String s3 = specialist.getString();
@@ -287,7 +289,7 @@ public class Main {
                   }
                 }
                 System.out.println("Row?");
-                int y13 = -9;
+                int y13 = MINUS_NINE;
                 while (y13 < 1 || y13 > 7) {
                   try {
                     String s3 = specialist.getString();
@@ -326,7 +328,7 @@ public class Main {
                 System.out.println("4) Find all possibilities (costs you 10000)");
                 System.out.println("0) You have changed your mind about cheating");
                 System.out.println("What do you want to do?");
-                int yy = -9;
+                int yy = MINUS_NINE;
                 while (yy < 0 || yy > 4) {
                   try {
                     String s3 = specialist.getString();
@@ -371,7 +373,7 @@ public class Main {
                     score -= 500;
                     System.out.println("Which domino?");
                     System.out.println("Number on one side?");
-                    int x4 = -9;
+                    int x4 = MINUS_NINE;
                     while (x4 < 0 || x4 > 6) {
                       try {
                         String s3 = specialist.getString();
@@ -381,7 +383,7 @@ public class Main {
                       }
                     }
                     System.out.println("Number on the other side?");
-                    int x5 = -9;
+                    int x5 = MINUS_NINE;
                     while (x5 < 0 || x5 > 6) {
                       try {
                         String s3 = IOLibrary.getString();
@@ -398,7 +400,7 @@ public class Main {
                     score -= 500;
                     System.out.println("Which location?");
                     System.out.println("Column?");
-                    int x3 = -9;
+                    int x3 = MINUS_NINE;
                     while (x3 < 1 || x3 > 8) {
                       try {
                         String s3 = IOLibrary.getString();
@@ -408,7 +410,7 @@ public class Main {
                       }
                     }
                     System.out.println("Row?");
-                    int y3 = -9;
+                    int y3 = MINUS_NINE;
                     while (y3 < 1 || y3 > 7) {
                       try {
                         String s3 = IOLibrary.getString();
