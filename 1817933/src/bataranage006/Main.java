@@ -1,14 +1,13 @@
 package bataranage006;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.io.*;
-import java.net.InetAddress;
-import java.text.DateFormat;
-import java.util.*;
 
-import javax.swing.JEditorPane;
-import javax.swing.JFrame;
-import javax.swing.JScrollPane;
+import java.awt.*;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.net.InetAddress;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * @author Kevan Buckley, maintained by Lakshitha Bataranage
@@ -72,23 +71,13 @@ public class Main {
       switch (CONST_VAL) {
 
         case 0:
-
           quiteGame();
-
           break;
-
 
         case 1: {
 
-          System.out.println();
-          String h4 = "Select difficulty";
-          String u4 = h4.replaceAll(".", "=");
-          System.out.println(u4);
-          System.out.println(h4);
-          System.out.println(u4);
-          System.out.println("1) Simples");
-          System.out.println("2) Not-so-simples");
-          System.out.println("3) Super-duper-shuffled");
+          selectDifficalty();
+
           int c2 = -7;
           while (!(c2 == 1 || c2 == 2 || c2 == 3)) {
             try {
@@ -515,6 +504,18 @@ public class Main {
 
     }
 
+  }
+
+  private void selectDifficalty() {
+    System.out.println();
+    String h4 = "Select difficulty";
+    String u4 = h4.replaceAll(".", "=");
+    System.out.println(u4);
+    System.out.println(h4);
+    System.out.println(u4);
+    System.out.println("1) Simples");
+    System.out.println("2) Not-so-simples");
+    System.out.println("3) Super-duper-shuffled");
   }
 
   private void getInspiration() {

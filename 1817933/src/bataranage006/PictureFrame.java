@@ -8,10 +8,30 @@ import javax.swing.*;
  */
 
 public class PictureFrame {
-  public int[] reroll = null;
+
+  //public int[] reroll = null;
   public Main master = null;
+  public DominoPanel dp;
+
+  public void PictureFrame(Main sf) {
+    master = sf;
+    if (dp == null) {
+      JFrame f = new JFrame("Abominodo");
+      dp = new DominoPanel();
+      f.setContentPane(dp);
+      f.pack();
+      f.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+      f.setVisible(true);
+    }
+  }
+
+  public void reset() {
+    // TODO Auto-generated method stub
+
+  }
 
   class DominoPanel extends JPanel {
+
     private static final long serialVersionUID = 4190229282411119364L;
 
     public void drawGrid(Graphics g) {
@@ -22,8 +42,6 @@ public class PictureFrame {
         }
       }
     }
-
-
 
     public void drawHeadings(Graphics g) {
       for (int are = 0; are < 7; are++) {
@@ -62,8 +80,7 @@ public class PictureFrame {
       g.drawString(txt, x - fm.stringWidth(txt) / 2, y + fm.getMaxAscent() / 2);
     }
 
-    void drawDigitGivenCentre(Graphics g, int x, int y, int diameter, int n,
-        Color c) {
+    void drawDigitGivenCentre(Graphics g, int x, int y, int diameter, int n, Color c) {
       int radius = diameter / 2;
       g.setColor(c);
       // g.drawOval(x - radius, y - radius, diameter, diameter);
@@ -81,13 +98,14 @@ public class PictureFrame {
       FontMetrics fm = g.getFontMetrics();
       String txt = Integer.toString(n);
       g.drawString(txt, x - fm.stringWidth(txt) / 2, y + fm.getMaxAscent() / 2);
+
     }
 
     protected void paintComponent(Graphics g) {
       g.setColor(Color.YELLOW);
       g.fillRect(0, 0, getWidth(), getHeight());
 
-      // numbaz(g);
+    /*  // numbaz(g);
       //
       // if (master!=null && master.orig != null) {
       // drawRoll(g, master.orig);
@@ -96,7 +114,7 @@ public class PictureFrame {
       // drawReroll(g, reroll);
       // }
       //
-      // drawGrid(g);
+      // drawGrid(g);*/
       Location l = new Location(1,2);
 
       if (master.mode == 1) {
@@ -117,25 +135,8 @@ public class PictureFrame {
       // the application window always prefers to be 202x182
       return new Dimension(202, 182);
     }
-  }
-
-  public DominoPanel dp;
-
-  public void PictureFrame(Main sf) {
-    master = sf;
-    if (dp == null) {
-      JFrame f = new JFrame("Abominodo");
-      dp = new DominoPanel();
-      f.setContentPane(dp);
-      f.pack();
-      f.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-      f.setVisible(true);
-    }
-  }
-
-  public void reset() {
-    // TODO Auto-generated method stub
 
   }
+
 
 }
