@@ -17,7 +17,7 @@ import java.util.List;
 public class Main {
 
   private static int CONST_VAL;
-  private IOSpecialist specialist;
+  private IOLibrary specialist;
   private static int MINUS_NINE = -9;
   private static int SET_OF_DOMINOES = 28;
 
@@ -46,7 +46,7 @@ public class Main {
   public void run() {
 
     //IOSpecialist specialist = new IOSpecialist();   // ------2
-    specialist = new IOSpecialist();
+    specialist = new IOLibrary();
 
     displayWelcomeMessage();
     getPlayerName();
@@ -76,7 +76,7 @@ public class Main {
 
         case 1: {
 
-          selectDifficalty();
+          selectDifficulty();
 
           int c2 = -7;
           while (!(c2 == 1 || c2 == 2 || c2 == 3)) {
@@ -506,7 +506,8 @@ public class Main {
 
   }
 
-  private void selectDifficalty() {
+  private void selectDifficulty() {
+
     System.out.println();
     String h4 = "Select difficulty";
     String u4 = h4.replaceAll(".", "=");
@@ -516,6 +517,7 @@ public class Main {
     System.out.println("1) Simples");
     System.out.println("2) Not-so-simples");
     System.out.println("3) Super-duper-shuffled");
+
   }
 
   private void getInspiration() {
@@ -628,7 +630,6 @@ public class Main {
     System.out.println(u1);
 
     System.out.println("1) Play");
-    // System.out.println("1) Single player play");
     System.out.println("2) View high scores");
     System.out.println("3) View rules");
     // System.out.println("4) Multiplayer play");

@@ -9,6 +9,7 @@ import java.net.*;
  */
 
 public final class IOLibrary {
+
   public static String getString() {
     BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
     do {
