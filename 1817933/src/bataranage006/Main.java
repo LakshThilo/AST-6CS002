@@ -26,8 +26,8 @@ public class Main {
 
   private int x;
   private String playerName;
-  public List<Domino> dominos;
-  public List<Domino> _g;
+  public List<Domino> dominoes;
+  public List<Domino> guessDominoes;
   public int[][] grid = new int[NUMBER_ROW][NUMBER_COL];
   public int[][] gg = new int[NUMBER_ROW][NUMBER_COL];
   int mode = -1;
@@ -172,7 +172,7 @@ public class Main {
                 printGuessGrid();
                 break;
               case 3:
-                Collections.sort(_g);
+                Collections.sort(guessDominoes);
                 printGuesses();
                 break;
               case 4:
@@ -486,7 +486,7 @@ public class Main {
           recordTheScore();
           System.out.println("Here is the solution:");
           System.out.println();
-          Collections.sort(dominos);
+          Collections.sort(dominoes);
           printDominoes();
           System.out.println("you scored " + score);
 
@@ -607,7 +607,7 @@ public class Main {
 
   private void quiteGame() {
 
-    if (dominos == null) {
+    if (dominoes == null) {
       System.out.println("It is a shame that you did not want to play");
     } else {
       System.out.println("Thank you for playing");
@@ -651,14 +651,14 @@ public class Main {
 
   private void generateDominoes() {
 
-    dominos = new LinkedList<Domino>();
+    dominoes = new LinkedList<Domino>();
     int count = 0;
     int x = 0;
     int y = 0;
     for (int l = 0; l <= 6; l++) {
       for (int h = l; h <= 6; h++) {
         Domino d = new Domino(h, l);
-        dominos.add(d);
+        dominoes.add(d);
         d.place(x, y, x + 1, y);
         count++;
         x += 2;
@@ -675,14 +675,14 @@ public class Main {
   }
 
   private void generateGuesses() {
-    _g = new LinkedList<Domino>();
+    guessDominoes = new LinkedList<Domino>();
     int count = 0;
     int x = 0;
     int y = 0;
     for (int l = 0; l <= 6; l++) {
       for (int h = l; h <= 6; h++) {
         Domino d = new Domino(h, l);
-        _g.add(d);
+        guessDominoes.add(d);
         count++;
       }
     }
@@ -694,7 +694,7 @@ public class Main {
 
   void collateGrid() {
 
-    for (Domino d : dominos) {
+    for (Domino d : dominoes) {
       if (!d.placed) {
         grid[d.hy][d.hx] = 9;
         grid[d.ly][d.lx] = 9;
@@ -712,7 +712,7 @@ public class Main {
         gg[r][c] = 9;
       }
     }
-    for (Domino d : _g) {
+    for (Domino d : guessDominoes) {
       if (d.placed) {
         gg[d.hy][d.hx] = d.high;
         gg[d.ly][d.lx] = d.low;
@@ -751,17 +751,17 @@ public class Main {
   private void shuffleDominoesOrder() {
     List<Domino> shuffled = new LinkedList<Domino>();
 
-    while (dominos.size() > 0) {
-      int n = (int) (Math.random() * dominos.size());
-      shuffled.add(dominos.get(n));
-      dominos.remove(n);
+    while (dominoes.size() > 0) {
+      int n = (int) (Math.random() * dominoes.size());
+      shuffled.add(dominoes.get(n));
+      dominoes.remove(n);
     }
 
-    dominos = shuffled;
+    dominoes = shuffled;
   }
 
   private void invertSomeDominoes() {
-    for (Domino d : dominos) {
+    for (Domino d : dominoes) {
       if (Math.random() > 0.5) {
         d.invert();
       }
@@ -772,7 +772,7 @@ public class Main {
     int x = 0;
     int y = 0;
     int count = 0;
-    for (Domino d : dominos) {
+    for (Domino d : dominoes) {
       count++;
       d.place(x, y, x + 1, y);
       x += 2;
@@ -854,7 +854,7 @@ public class Main {
   }
 
   private Domino findDominoAt(int x, int y) {
-    for (Domino d : dominos) {
+    for (Domino d : dominoes) {
       if ((d.lx == x && d.ly == y) || (d.hx == x && d.hy == y)) {
         return d;
       }
@@ -863,7 +863,7 @@ public class Main {
   }
 
   private Domino findGuessAt(int x, int y) {
-    for (Domino d : _g) {
+    for (Domino d : guessDominoes) {
       if ((d.lx == x && d.ly == y) || (d.hx == x && d.hy == y)) {
         return d;
       }
@@ -872,7 +872,7 @@ public class Main {
   }
 
   private Domino findGuessByLH(int x, int y) {
-    for (Domino d : _g) {
+    for (Domino d : guessDominoes) {
       if ((d.low == x && d.high == y) || (d.high == x && d.low == y)) {
         return d;
       }
@@ -881,7 +881,7 @@ public class Main {
   }
 
   private Domino findDominoByLH(int x, int y) {
-    for (Domino d : dominos) {
+    for (Domino d : dominoes) {
       if ((d.low == x && d.high == y) || (d.high == x && d.low == y)) {
         return d;
       }
@@ -890,13 +890,13 @@ public class Main {
   }
 
   private void printDominoes() {
-    for (Domino d : dominos) {
+    for (Domino d : dominoes) {
       System.out.println(d);
     }
   }
 
   private void printGuesses() {
-    for (Domino d : _g) {
+    for (Domino d : guessDominoes) {
       System.out.println(d);
     }
   }
@@ -921,7 +921,7 @@ public class Main {
 
 
   public void drawDominoes(Graphics g) {
-    for (Domino d : dominos) {
+    for (Domino d : dominoes) {
       pf.dp.drawDomino(g, d);
     }
   }
@@ -939,7 +939,7 @@ public class Main {
   }
 
   public void drawGuesses(Graphics g) {
-    for (Domino d : _g) {
+    for (Domino d : guessDominoes) {
       pf.dp.drawDomino(g, d);
     }
   }
