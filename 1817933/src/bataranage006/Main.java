@@ -536,7 +536,10 @@ public class Main {
     System.out.println(u4);
     System.out.println(h4);
 
-    JFrame f = new JFrame("Rules by Lakshitha Bataranage");
+    new ViewRules();
+
+
+  /*  JFrame f = new JFrame("Rules by Lakshitha Bataranage");
 
     f.setSize(new Dimension(500, 500));
     JEditorPane w;
@@ -549,7 +552,7 @@ public class Main {
     }
     f.setContentPane(new JScrollPane(w));
     f.setVisible(true);
-    f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);*/
   }
 
   private void getHighScores() {
