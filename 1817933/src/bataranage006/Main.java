@@ -26,7 +26,7 @@ public class Main {
   private static final int NUMBER_ROW = 7;
 
   private int x;
-  private String playerName;
+  private static String playerName;
   public List<Domino> dominoes;
   public List<Domino> guessDominoes;
   public int[][] grid = new int[NUMBER_ROW][NUMBER_COL];
@@ -563,7 +563,9 @@ public class Main {
     System.out.println(h4);
     System.out.println(u4);
 
-    File f = new File("score.txt");
+    new FindScore(playerName);
+
+   /* File f = new File("score.txt");
     if (!(f.exists() && f.isFile() && f.canRead())) {
       System.out.println("Creating new score table");
       try {
@@ -602,7 +604,7 @@ public class Main {
     } catch (Exception e) {
       System.out.println("Malfunction!!");
       System.exit(0);
-    }
+    }*/
   }
 
   private void quiteGame() {
