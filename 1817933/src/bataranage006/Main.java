@@ -20,6 +20,7 @@ public class Main {
   private static int CONST_VAL;
   private IOSpecialist specialist;
   private static int MINUS_NINE = -9;
+  private static int SET_OF_DOMINOES = 28;
 
   private static final int NUMBER_COL = 8;
   private static final int NUMBER_ROW = 7;
@@ -510,10 +511,6 @@ public class Main {
         case 5:
           getInspiration();
           break;
-
-
-
-
       }
 
     }
@@ -668,7 +665,7 @@ public class Main {
         }
       }
     }
-    if (count != 28) {
+    if (count != SET_OF_DOMINOES) {
       System.out.println("something went wrong generating dominoes");
       System.exit(0);
     }
@@ -686,7 +683,7 @@ public class Main {
         count++;
       }
     }
-    if (count != 28) {
+    if (count != SET_OF_DOMINOES) {
       System.out.println("something went wrong generating dominoes");
       System.exit(0);
     }
@@ -781,7 +778,7 @@ public class Main {
         y++;
       }
     }
-    if (count != 28) {
+    if (count != SET_OF_DOMINOES) {
       System.out.println("something went wrong generating dominoes");
       System.exit(0);
     }
