@@ -39,9 +39,6 @@ public class Main {
 
   public final int ZERO = 0;
 
-  public static void main(String[] args) {
-    new Main().run();
-  }
 
   public void run() {
 
