@@ -5,7 +5,7 @@ package bataranage006;
  */
 
 public class MultiLingualStringTable {
-  private enum LanguageSetting {English, Klingon}
+  //private enum LanguageSetting {English, Klingon}
   private static LanguageSetting cl = LanguageSetting.English;
   private static String [] em = {"Enter your name:", "Welcome", "Have a good time playing Abominodo"};
   private static String [] km = {"'el lIj pong:", "nuqneH", "QaQ poH Abominodo"};
