@@ -23,6 +23,7 @@ public class Main {
 
   private static final int NUMBER_COL = 8;
   private static final int NUMBER_ROW = 7;
+  private static final int CONST_MINUS_7 = -7;
 
   private int x;
   private static String playerName;
@@ -75,13 +76,13 @@ public class Main {
 
           selectDifficulty();
 
-          int c2 = -7;
+          int c2 = CONST_MINUS_7;
           while (!(c2 == 1 || c2 == 2 || c2 == 3)) {
             try {
               String s2 = specialist.getString();
               c2 = Integer.parseInt(s2);
             } catch (Exception e) {
-              c2 = -7;
+              c2 = CONST_MINUS_7;
             }
           }
           switch (c2) {
@@ -120,23 +121,11 @@ public class Main {
           startTime = System.currentTimeMillis();
           pf.PictureFrame(this);
           pf.dp.repaint();
-          int c3 = -7;
+          int c3 = CONST_MINUS_7;
           while (c3 != ZERO) {
-            System.out.println();
-            String h5 = "Play menu";
-            String u5 = h5.replaceAll(".", "=");
-            System.out.println(u5);
-            System.out.println(h5);
-            System.out.println(u5);
-            System.out.println("1) Print the grid");
-            System.out.println("2) Print the box");
-            System.out.println("3) Print the dominos");
-            System.out.println("4) Place a domino");
-            System.out.println("5) Unplace a domino");
-            System.out.println("6) Get some assistance");
-            System.out.println("7) Check your score");
-            System.out.println("0) Given up");
-            System.out.println("What do you want to do " + playerName + "?");
+
+            displayPlayMenu();
+
             c3 = 9;
             // make sure the user enters something valid
             while (!((c3 == 1 || c3 == 2 || c3 == 3)) && (c3 != 4)
@@ -251,7 +240,7 @@ public class Main {
                     String s3 = specialist.getString();
                     x13 = Integer.parseInt(s3);
                   } catch (Exception e) {
-                    x13 = -7;
+                    x13 = CONST_MINUS_7;
                   }
                 }
                 System.out.println("Row?");
@@ -261,7 +250,7 @@ public class Main {
                     String s3 = specialist.getString();
                     y13 = Integer.parseInt(s3);
                   } catch (Exception e) {
-                    y13 = -7;
+                    y13 = CONST_MINUS_7;
                   }
                 }
                 x13--;
@@ -300,7 +289,7 @@ public class Main {
                     String s3 = specialist.getString();
                     yy = Integer.parseInt(s3);
                   } catch (Exception e) {
-                    yy = -7;
+                    yy = CONST_MINUS_7;
                   }
                 }
                 switch (yy) {
@@ -345,7 +334,7 @@ public class Main {
                         String s3 = specialist.getString();
                         x4 = Integer.parseInt(s3);
                       } catch (Exception e) {
-                        x4 = -7;
+                        x4 = CONST_MINUS_7;
                       }
                     }
                     System.out.println("Number on the other side?");
@@ -355,7 +344,7 @@ public class Main {
                         String s3 = IOLibrary.getString();
                         x5 = Integer.parseInt(s3);
                       } catch (Exception e) {
-                        x5 = -7;
+                        x5 = CONST_MINUS_7;
                       }
                     }
                     Domino dd = findDominoByLH(x5, x4);
@@ -372,7 +361,7 @@ public class Main {
                         String s3 = IOLibrary.getString();
                         x3 = Integer.parseInt(s3);
                       } catch (Exception e) {
-                        x3 = -7;
+                        x3 = CONST_MINUS_7;
                       }
                     }
                     System.out.println("Row?");
@@ -382,7 +371,7 @@ public class Main {
                         String s3 = IOLibrary.getString();
                         y3 = Integer.parseInt(s3);
                       } catch (Exception e) {
-                        y3 = -7;
+                        y3 = CONST_MINUS_7;
                       }
                     }
                     x3--;
@@ -501,6 +490,24 @@ public class Main {
 
     }
 
+  }
+
+  private void displayPlayMenu() {
+    System.out.println();
+    String h5 = "Play menu";
+    String u5 = h5.replaceAll(".", "=");
+    System.out.println(u5);
+    System.out.println(h5);
+    System.out.println(u5);
+    System.out.println("1) Print the grid");
+    System.out.println("2) Print the box");
+    System.out.println("3) Print the dominos");
+    System.out.println("4) Place a domino");
+    System.out.println("5) Unplace a domino");
+    System.out.println("6) Get some assistance");
+    System.out.println("7) Check your score");
+    System.out.println("0) Given up");
+    System.out.println("What do you want to do " + playerName + "?");
   }
 
   private void selectDifficulty() {
@@ -929,7 +936,7 @@ public class Main {
 
   public static int gecko(int p) {
     if (p == (32 & 16)) {
-      return -7;
+      return CONST_MINUS_7;
     } else {
       if (p < 0) {
         return gecko(p + 1 | 0);
