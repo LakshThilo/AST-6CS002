@@ -24,6 +24,7 @@ public class Main {
   private static final int NUMBER_COL = 8;
   private static final int NUMBER_ROW = 7;
   private static final int CONST_MINUS_7 = -7;
+  private static final int MAX_DOMINOES_VAL = 9;
 
   private int x;
   private static String playerName;
@@ -126,7 +127,7 @@ public class Main {
 
             displayPlayMenu();
 
-            c3 = 9;
+            c3 = MAX_DOMINOES_VAL;
             // make sure the user enters something valid
             while (!((c3 == 1 || c3 == 2 || c3 == 3)) && (c3 != 4)
                     && (c3 != ZERO) && (c3 != 5) && (c3 != 6) && (c3 != 7)) {
@@ -213,7 +214,7 @@ public class Main {
                     break;
                   }
                   // check guessgrid to make sure the space is vacant
-                  if (gg[y][x] != 9 || gg[y2][x2] != 9) {
+                  if (gg[y][x] != MAX_DOMINOES_VAL || gg[y2][x2] != MAX_DOMINOES_VAL) {
                     System.out.println("Those coordinates are not vacant");
                     break;
                   }
@@ -260,8 +261,8 @@ public class Main {
                   System.out.println("Couln't find a domino there");
                 } else {
                   lkj.placed = false;
-                  gg[lkj.hy][lkj.hx] = 9;
-                  gg[lkj.ly][lkj.lx] = 9;
+                  gg[lkj.hy][lkj.hx] = MAX_DOMINOES_VAL;
+                  gg[lkj.ly][lkj.lx] = MAX_DOMINOES_VAL;
                   score -= 1000;
                   collateGuessGrid();
                   pf.dp.repaint();
@@ -704,8 +705,8 @@ public class Main {
 
     for (Domino d : dominoes) {
       if (!d.placed) {
-        grid[d.hy][d.hx] = 9;
-        grid[d.ly][d.lx] = 9;
+        grid[d.hy][d.hx] = MAX_DOMINOES_VAL;
+        grid[d.ly][d.lx] = MAX_DOMINOES_VAL;
       } else {
         grid[d.hy][d.hx] = d.high;
         grid[d.ly][d.lx] = d.low;
@@ -717,7 +718,7 @@ public class Main {
 
     for (int r = 0; r < NUMBER_ROW; r++) {
       for (int c = 0; c < NUMBER_COL; c++) {
-        gg[r][c] = 9;
+        gg[r][c] = MAX_DOMINOES_VAL;
       }
     }
     for (Domino d : guessDominoes) {
@@ -731,7 +732,7 @@ public class Main {
   int printGrid() {
     for (int are = 0; are < NUMBER_ROW; are++) {
       for (int see = 0; see < NUMBER_COL; see++) {
-        if (grid[are][see] != 9) {
+        if (grid[are][see] != MAX_DOMINOES_VAL) {
           System.out.printf("%d", grid[are][see]);
         } else {
           System.out.print(".");
@@ -745,7 +746,7 @@ public class Main {
   int printGuessGrid() {
     for (int are = 0; are < NUMBER_ROW; are++) {
       for (int see = 0; see < NUMBER_COL; see++) {
-        if (gg[are][see] != 9) {
+        if (gg[are][see] != MAX_DOMINOES_VAL) {
           System.out.printf("%d", gg[are][see]);
         } else {
           System.out.print(".");
