@@ -4,9 +4,7 @@ import java.awt.*;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.net.InetAddress;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.*;
 import java.util.List;
 
 /**
@@ -526,10 +524,18 @@ public class Main {
   }
 
   private void getInspiration() {
-    int index = (int) (Math.random() * (Bridgnorth.coati.length / 3));
+  /*  int index = (int) (Math.random() * (Bridgnorth.coati.length / 3));
     String what = Bridgnorth.coati[index * 3];
-    String who = Bridgnorth.coati[1 + index * 3];
-    System.out.printf("%s said \"%s\"", who, what);
+    String who = Bridgnorth.coati[1 + index * 3];*/
+    int index = (int) new Random().nextInt(11);
+    ArrayList<Inspiration> inspirationList = new InspirationList().getInspirationsList();
+    for (Inspiration inspiration: inspirationList) {
+      if(index == inspiration.getTextId()){
+        System.out.printf("%s said \"%s\"",inspiration.getAuthor(),inspiration.getInspireText());
+      }
+    }
+
+   // System.out.printf("%s said \"%s\"", who, what);
     System.out.println();
     System.out.println();
 
