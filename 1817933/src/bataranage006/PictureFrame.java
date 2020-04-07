@@ -34,14 +34,22 @@ public class PictureFrame {
 
     private static final long serialVersionUID = 4190229282411119364L;
     private Coordinates coordinates,coordinates1;
+    private static final int MAX_ROW = 7;
+    private static final int MAX_COLUMN = 8;
+    private static final int CONST_30 = 30;
+    private static final int CONST_20 = 20;
+    private static final int CONST_10 = 10;
+    private static final int APP_WINDOW_WIDTH = 202;
+    private static final int APP_WINDOW_HEIGHT = 182;
+
 
     public void drawGrid(Graphics g) {
-      for (int are = 0; are < 7; are++) {
-        for (int see = 0; see < 8; see++) {
+      for (int are = 0; are < MAX_ROW; are++) {
+        for (int see = 0; see < MAX_COLUMN; see++) {
           coordinates = new Coordinates();
-          coordinates.setX_cordinate(30 + see * 20);
-          coordinates.setY_cordinate(30 + are * 20);
-          coordinates.setDiameter( 20);
+          coordinates.setX_cordinate(CONST_30 + see * CONST_20);
+          coordinates.setY_cordinate(CONST_30 + are * CONST_20);
+          coordinates.setDiameter(CONST_20);
           coordinates.setNum(master.grid[are][see]);
           drawDigitGivenCentre(g, coordinates, Color.BLACK);
         }
@@ -51,21 +59,21 @@ public class PictureFrame {
     public void drawHeadings(Graphics g) {
 
 
-      for (int are = 0; are < 7; are++) {
+      for (int are = 0; are < MAX_ROW; are++) {
         coordinates = new Coordinates();
-        coordinates.setX_cordinate(10);
-        coordinates.setY_cordinate(30 + are * 20);
-        coordinates.setDiameter(20);
+        coordinates.setX_cordinate(CONST_10);
+        coordinates.setY_cordinate(CONST_30 + are * CONST_20);
+        coordinates.setDiameter(CONST_20);
         coordinates.setNum(are+1);
         //fillDigitGivenCentre(g, 10, 30 + are * 20, 20, are+1);
         fillDigitGivenCentre(g, coordinates);
       }
 
-      for (int see = 0; see < 8; see++) {
+      for (int see = 0; see < MAX_COLUMN; see++) {
         coordinates1 = new Coordinates();
-        coordinates1.setX_cordinate(30 + see * 20);
-        coordinates1.setY_cordinate(10);
-        coordinates1.setDiameter(20);
+        coordinates1.setX_cordinate(CONST_30 + see * CONST_20);
+        coordinates1.setY_cordinate(CONST_10);
+        coordinates1.setDiameter(CONST_20);
         coordinates1.setNum(see+1);
         //fillDigitGivenCentre(g, 30 + see * 20, 10, 20, see+1);
         fillDigitGivenCentre(g, coordinates1);
@@ -82,21 +90,21 @@ public class PictureFrame {
         int w = Math.abs(d.lx - d.hx) + 1;
         int h = Math.abs(d.ly - d.hy) + 1;
         g.setColor(Color.WHITE);
-        g.fillRect(20 + x * 20, 20 + y * 20, w * 20, h * 20);
+        g.fillRect(CONST_20 + x * CONST_20, CONST_20 + y * CONST_20, w * CONST_20, h * CONST_20);
         g.setColor(Color.RED);
-        g.drawRect(20 + x * 20, 20 + y * 20, w * 20, h * 20);
+        g.drawRect(CONST_20 + x * CONST_20, CONST_20 + y * CONST_20, w * CONST_20, h * CONST_20);
 
         coordinates = new Coordinates();
-        coordinates.setX_cordinate(30 + d.hx * 20);
-        coordinates.setY_cordinate(30 + d.hy * 20);
-        coordinates.setDiameter( 20);
+        coordinates.setX_cordinate(CONST_30 + d.hx * CONST_20);
+        coordinates.setY_cordinate(CONST_30 + d.hy * CONST_20);
+        coordinates.setDiameter( CONST_20);
         coordinates.setNum(d.high);
         //refactoredDrawDigitCenter(g,coordinates1);
 
         coordinates1 = new Coordinates();
-        coordinates1.setX_cordinate(30 + d.lx * 20);
-        coordinates1.setY_cordinate(30 + d.ly * 20);
-        coordinates1.setDiameter( 20);
+        coordinates1.setX_cordinate(CONST_30 + d.lx * CONST_20);
+        coordinates1.setY_cordinate(CONST_30 + d.ly * CONST_20);
+        coordinates1.setDiameter( CONST_20);
         coordinates1.setNum(d.low);
        // refactoredDrawDigitCenter(g,coordinates2);
 
@@ -194,7 +202,7 @@ public class PictureFrame {
 
     public Dimension getPreferredSize() {
       // the application window always prefers to be 202x182
-      return new Dimension(202, 182);
+      return new Dimension(APP_WINDOW_WIDTH, APP_WINDOW_HEIGHT);
     }
 
   }
