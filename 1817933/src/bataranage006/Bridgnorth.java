@@ -1,3 +1,4 @@
+/*
 package bataranage006;
 public class Bridgnorth {
   static transient String[] coati = {
@@ -12,3 +13,4 @@ public class Bridgnorth {
     "I'd rather hear an old truth than a new lie.","Chris Bowyer","",
     "It is noble to be good; it is still nobler to teach others to be good - and less trouble.","Mark Twain",""};
 }
+*/
