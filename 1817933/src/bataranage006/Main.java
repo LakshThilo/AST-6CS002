@@ -531,6 +531,7 @@ public class Main {
     ArrayList<Inspiration> inspirationList = new InspirationList().getInspirationsList();
     for (Inspiration inspiration: inspirationList) {
       if(index == inspiration.getTextId()){
+        System.out.println();
         System.out.printf("%s said \"%s\"",inspiration.getAuthor(),inspiration.getInspireText());
       }
     }

@@ -33,7 +33,8 @@ public class PictureFrame {
   class DominoPanel extends JPanel {
 
     private static final long serialVersionUID = 4190229282411119364L;
-    private Coordinates coordinates;
+    private Coordinates coordinates,coordinates1;
+
     public void drawGrid(Graphics g) {
       for (int are = 0; are < 7; are++) {
         for (int see = 0; see < 8; see++) {
@@ -48,17 +49,33 @@ public class PictureFrame {
     }
 
     public void drawHeadings(Graphics g) {
+
+
       for (int are = 0; are < 7; are++) {
-        fillDigitGivenCentre(g, 10, 30 + are * 20, 20, are+1);
+        coordinates = new Coordinates();
+        coordinates.setX_cordinate(10);
+        coordinates.setY_cordinate(30 + are * 20);
+        coordinates.setDiameter(20);
+        coordinates.setNum(are+1);
+        //fillDigitGivenCentre(g, 10, 30 + are * 20, 20, are+1);
+        fillDigitGivenCentre(g, coordinates);
       }
 
       for (int see = 0; see < 8; see++) {
-        fillDigitGivenCentre(g, 30 + see * 20, 10, 20, see+1);
+        coordinates1 = new Coordinates();
+        coordinates1.setX_cordinate(30 + see * 20);
+        coordinates1.setY_cordinate(10);
+        coordinates1.setDiameter(20);
+        coordinates1.setNum(see+1);
+        //fillDigitGivenCentre(g, 30 + see * 20, 10, 20, see+1);
+        fillDigitGivenCentre(g, coordinates1);
       }
     }
 
     public void drawDomino(Graphics g, Domino d) {
-      Coordinates coordinates1,coordinates2;
+
+      //Coordinates coordinates1,coordinates2;
+
       if (d.placed) {
         int y = Math.min(d.ly, d.hy);
         int x = Math.min(d.lx, d.hx);
@@ -69,22 +86,22 @@ public class PictureFrame {
         g.setColor(Color.RED);
         g.drawRect(20 + x * 20, 20 + y * 20, w * 20, h * 20);
 
-        coordinates1 = new Coordinates();
-        coordinates1.setX_cordinate(30 + d.hx * 20);
-        coordinates1.setY_cordinate(30 + d.hy * 20);
-        coordinates1.setDiameter( 20);
-        coordinates1.setNum(d.high);
+        coordinates = new Coordinates();
+        coordinates.setX_cordinate(30 + d.hx * 20);
+        coordinates.setY_cordinate(30 + d.hy * 20);
+        coordinates.setDiameter( 20);
+        coordinates.setNum(d.high);
         //refactoredDrawDigitCenter(g,coordinates1);
 
-        coordinates2 = new Coordinates();
-        coordinates2.setX_cordinate(30 + d.lx * 20);
-        coordinates2.setY_cordinate(30 + d.ly * 20);
-        coordinates2.setDiameter( 20);
-        coordinates2.setNum(d.low);
+        coordinates1 = new Coordinates();
+        coordinates1.setX_cordinate(30 + d.lx * 20);
+        coordinates1.setY_cordinate(30 + d.ly * 20);
+        coordinates1.setDiameter( 20);
+        coordinates1.setNum(d.low);
        // refactoredDrawDigitCenter(g,coordinates2);
 
-        drawDigitGivenCentre(g,coordinates1 ,Color.BLUE);
-        drawDigitGivenCentre(g, coordinates2, Color.BLUE);
+        drawDigitGivenCentre(g,coordinates ,Color.BLUE);
+        drawDigitGivenCentre(g, coordinates1, Color.BLUE);
       }
     }
 
@@ -128,15 +145,20 @@ public class PictureFrame {
       g.drawString(txt, x - fm.stringWidth(txt) / 2, y + fm.getMaxAscent() / 2);
     }*/
 
-    void fillDigitGivenCentre(Graphics g, int x, int y, int diameter, int n) {
+    void fillDigitGivenCentre(Graphics g, Coordinates c) {
+      int xCoordinate = c.getX_cordinate();
+      int yCoordinate = c.getY_cordinate();
+      int diameter = c.getDiameter();
+      int num = c.getNum();
+
       int radius = diameter / 2;
       g.setColor(Color.GREEN);
-      g.fillOval(x - radius, y - radius, diameter, diameter);
+      g.fillOval(xCoordinate - radius, yCoordinate - radius, diameter, diameter);
       g.setColor(Color.BLACK);
-      g.drawOval(x - radius, y - radius, diameter, diameter);
+      g.drawOval(xCoordinate - radius, yCoordinate - radius, diameter, diameter);
       FontMetrics fm = g.getFontMetrics();
-      String txt = Integer.toString(n);
-      g.drawString(txt, x - fm.stringWidth(txt) / 2, y + fm.getMaxAscent() / 2);
+      String txt = Integer.toString(num);
+      g.drawString(txt, xCoordinate - fm.stringWidth(txt) / 2, yCoordinate + fm.getMaxAscent() / 2);
 
     }
 
