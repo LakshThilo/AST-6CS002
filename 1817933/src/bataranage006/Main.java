@@ -84,7 +84,10 @@ public class Main {
               c2 = CONST_MINUS_7;
             }
           }
-          switch (c2) {
+
+          grid =  new SelectDifficulty(dominoes).getGrid();
+
+/*          switch (c2) {
             case 1:
               generateDominoes();
               shuffleDominoesOrder();
@@ -110,7 +113,9 @@ public class Main {
               invertSomeDominoes();
               collateGrid();
               break;
-          }
+          }*/
+
+
           printGrid();
           generateGuesses();
           collateGuessGrid();
