@@ -1,4 +1,4 @@
-package bataranage006;
+package bataranage006.model;
 
 public class Coordinates {
 

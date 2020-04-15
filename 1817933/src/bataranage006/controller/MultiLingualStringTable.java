@@ -1,4 +1,5 @@
-package bataranage006;
+package bataranage006.controller;
+
 /**
  * @author Kevan Buckley, maintained by Lakshitha Bataranage
  * @version 20.01, 2020

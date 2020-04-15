@@ -1,4 +1,4 @@
-package bataranage006;
+package bataranage006.controller;
 import java.net.InetAddress;
 /**
  * @author Kevan Buckley, maintained by Lakshitha Bataranage

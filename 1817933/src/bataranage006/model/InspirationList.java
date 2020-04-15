@@ -1,7 +1,8 @@
-package bataranage006;
+package bataranage006.model;
+
+import bataranage006.controller.Inspiration;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class InspirationList {
 

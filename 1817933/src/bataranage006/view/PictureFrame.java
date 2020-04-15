@@ -1,4 +1,8 @@
-package bataranage006;
+package bataranage006.view;
+import bataranage006.model.Coordinates;
+import bataranage006.model.Domino;
+import bataranage006.controller.Location;
+
 import java.awt.*;
 
 import javax.swing.*;

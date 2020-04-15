@@ -1,4 +1,4 @@
-package bataranage006;
+package bataranage006.view;
 
 import javax.swing.*;
 import java.awt.*;

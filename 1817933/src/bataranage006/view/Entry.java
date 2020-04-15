@@ -1,4 +1,6 @@
-package bataranage006;
+package bataranage006.view;
+
+import bataranage006.view.Main;
 
 public class Entry {
 

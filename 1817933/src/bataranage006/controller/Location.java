@@ -1,4 +1,6 @@
-package bataranage006;
+package bataranage006.controller;
+import bataranage006.model.SpacePlace;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.io.BufferedReader;

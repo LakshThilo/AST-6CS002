@@ -1,4 +1,8 @@
-package bataranage006;
+package bataranage006.view;
+
+import bataranage006.controller.*;
+import bataranage006.model.Domino;
+import bataranage006.model.InspirationList;
 
 import java.awt.*;
 import java.io.FileWriter;
@@ -30,7 +34,7 @@ public class Main {
   public List<Domino> guessDominoes;
   public int[][] grid = new int[NUMBER_ROW][NUMBER_COL];
   public int[][] gg = new int[NUMBER_ROW][NUMBER_COL];
-  int mode = -1;
+  public int mode = -1;
   int cf;
   int score;
   long startTime;
@@ -71,6 +75,10 @@ public class Main {
           quiteGame();
           break;
 
+   /*     case 1:
+          new PalyGame(this);
+          break;*/
+
         case 1: {
 
           selectDifficulty();
@@ -85,9 +93,9 @@ public class Main {
             }
           }
 
-          grid =  new SelectDifficulty(dominoes).getGrid();
+         // grid =  new SelectDifficulty(dominoes).getGrid();
 
-/*          switch (c2) {
+          switch (c2) {
             case 1:
               generateDominoes();
               shuffleDominoesOrder();
@@ -113,7 +121,7 @@ public class Main {
               invertSomeDominoes();
               collateGrid();
               break;
-          }*/
+          }
 
 
           printGrid();
@@ -472,7 +480,6 @@ public class Main {
 
         }
         break;
-
         case 2:
           getHighScores();
         break;
