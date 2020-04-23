@@ -3,6 +3,7 @@ package bataranage006.view;
 import bataranage006.controller.*;
 import bataranage006.model.Domino;
 
+import java.awt.*;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.Collections;
@@ -33,13 +34,16 @@ public class PalyGame {
     int score;
     long startTime;
 
+
     PictureFrame pf = new PictureFrame();
 
     public final int ZERO = 0;
     private Main main;
 
-    public PalyGame(Main main){
+    public PalyGame(Main main,String playerName){
 
+        playerName = playerName;
+        //System.out.println(playerName);
         main = main;
 
 
@@ -63,7 +67,7 @@ public class PalyGame {
         cf = 0;
         score = 0;
         startTime = System.currentTimeMillis();
-        pf.PictureFrame(main);
+        //pf.PictureFrame(this); ///////////////////////////// remove to comment
         pf.dp.repaint();
         int c3 = CONST_MINUS_7;
         while (c3 != ZERO) {
@@ -257,12 +261,14 @@ public class PalyGame {
                                         score -= 100;
                                     }
                                     playerName = playerName + "(scoundrel)";
+                                    System.out.println("debugg#2"+playerName);
                                     cf++;
                                     break;
                                 default:
                                     System.out.println("Some people just don't learn");
                                     playerName = playerName.replace("scoundrel",
                                             "pathetic scoundrel");
+                                    System.out.println("debugg#3"+playerName);
                                     for (int i = 0; i < 10000; i++) {
                                         score--;
                                     }
@@ -392,7 +398,7 @@ public class PalyGame {
         }
         mode = 0;
         printGrid();
-        pf.dp.repaint();
+       // pf.dp.repaint();
         long now = System.currentTimeMillis();
         try {
             Thread.sleep(1000);
@@ -528,7 +534,7 @@ public class PalyGame {
             return CONST_MINUS_7;
         } else {
             if (p < 0) {
-                return gecko(p + 1 | 0);
+                return gecko(p + 1| 0);
             } else {
                 return gecko(p - 1 | 0);
             }
@@ -577,6 +583,20 @@ public class PalyGame {
         System.out.println("2) Not-so-simples");
         System.out.println("3) Super-duper-shuffled");
 
+    }
+
+
+    public void drawDominoes(Graphics g) {
+        for (Domino d : dominoes) {
+            pf.dp.drawDomino(g, d);
+        }
+    }
+
+
+    public void drawGuesses(Graphics g) {
+        for (Domino d : guessDominoes) {
+            pf.dp.drawDomino(g, d);
+        }
     }
 
 }

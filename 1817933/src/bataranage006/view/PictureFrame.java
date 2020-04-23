@@ -15,10 +15,23 @@ public class PictureFrame {
 
   //public int[] reroll = null;
   public Main master = null;
+  //public PalyGame master = null;  //----------------------------------comment
   public DominoPanel dp;
 
-  public void PictureFrame(Main sf) {
+/*  public void PictureFrame(PalyGame sf) {
     master = sf;
+    if (dp == null) {
+      JFrame f = new JFrame("Abominodo");
+      dp = new DominoPanel();
+      f.setContentPane(dp);
+      f.pack();
+      f.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+      f.setVisible(true);
+    }
+  }*/
+
+  public void PictureFrame(Main sf) {
+      master = sf;
     if (dp == null) {
       JFrame f = new JFrame("Abominodo");
       dp = new DominoPanel();

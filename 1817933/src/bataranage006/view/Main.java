@@ -22,12 +22,10 @@ public class Main {
   private IOLibrary specialist;
   private static int MINUS_NINE = -9;
   private static int SET_OF_DOMINOES = 28;
-
   private static final int NUMBER_COL = 8;
   private static final int NUMBER_ROW = 7;
   private static final int CONST_MINUS_7 = -7;
   private static final int MAX_DOMINOES_VAL = 9;
-
   private int x;
   private static String playerName;
   public List<Domino> dominoes;
@@ -38,6 +36,7 @@ public class Main {
   int cf;
   int score;
   long startTime;
+
 
   PictureFrame pf = new PictureFrame();
 
@@ -50,7 +49,7 @@ public class Main {
     specialist = new IOLibrary();
 
     displayWelcomeMessage();
-    getPlayerName();
+    playerName = getPlayerName();
 
     //  int constVal = MINUS_NINE;  // ----------------------------- 1
     CONST_VAL = MINUS_NINE;
@@ -75,8 +74,8 @@ public class Main {
           quiteGame();
           break;
 
-   /*     case 1:
-          new PalyGame(this);
+     /*   case 1:
+          new PalyGame(this,playerName);
           break;*/
 
         case 1: {
@@ -131,7 +130,7 @@ public class Main {
           cf = 0;
           score = 0;
           startTime = System.currentTimeMillis();
-          pf.PictureFrame(this);
+          pf.PictureFrame(this);//-------------------2
           pf.dp.repaint();
           int c3 = CONST_MINUS_7;
           while (c3 != ZERO) {
@@ -460,7 +459,7 @@ public class Main {
           }
           mode = 0;
           printGrid();
-          pf.dp.repaint();
+        //  pf.dp.repaint();
           long now = System.currentTimeMillis();
           try {
             Thread.sleep(1000);
@@ -661,7 +660,7 @@ public class Main {
     System.out.println("0) Quit");
   }
 
-  private void getPlayerName() {
+  private String getPlayerName() {
 
     System.out.println();
     System.out.println(MultiLingualStringTable.getMessage(0));
@@ -669,6 +668,8 @@ public class Main {
 
     System.out.printf("%s %s. %s", MultiLingualStringTable.getMessage(1),
             playerName, MultiLingualStringTable.getMessage(2));
+
+    return playerName;
   }
 
   private void displayWelcomeMessage() {
@@ -816,11 +817,11 @@ public class Main {
   }
 
   private void rotateDominoes() {
-    // for (Domino d : dominoes) {
-    // if (Math.random() > 0.5) {
-    // System.out.println("rotating " + d);
-    // }
-    // }
+    for (Domino d : dominoes) {
+     if (Math.random() > 0.5) {
+    System.out.println("rotating " + d);
+     }
+     }
     for (int x = 0; x < NUMBER_ROW; x++) {
       for (int y = 0; y < 6; y++) {
 
