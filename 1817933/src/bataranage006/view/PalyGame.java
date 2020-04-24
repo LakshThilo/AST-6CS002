@@ -67,7 +67,7 @@ public class PalyGame {
         cf = 0;
         score = 0;
         startTime = System.currentTimeMillis();
-        //pf.PictureFrame(this); ///////////////////////////// remove to comment
+       // pf.PictureFrame(this); ///////////////////////////// remove to comment
         pf.dp.repaint();
         int c3 = CONST_MINUS_7;
         while (c3 != ZERO) {
@@ -396,25 +396,6 @@ public class PalyGame {
             }
 
         }
-        mode = 0;
-        printGrid();
-       // pf.dp.repaint();
-        long now = System.currentTimeMillis();
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        int gap = (int) (now - startTime);
-        int bonus = 60000 - gap;
-        score += bonus > 0 ? bonus / 1000 : 0;
-        recordTheScore();
-        System.out.println("Here is the solution:");
-        System.out.println();
-        Collections.sort(dominoes);
-        printDominoes();
-        System.out.println("you scored " + score);
     }
 
     int printGrid() {
