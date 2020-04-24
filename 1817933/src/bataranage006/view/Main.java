@@ -1,6 +1,7 @@
 package bataranage006.view;
 
 import bataranage006.controller.*;
+import bataranage006.model.ConnectionGenius;
 import bataranage006.model.Domino;
 import bataranage006.model.InspirationList;
 
@@ -18,29 +19,33 @@ import java.util.List;
 
 public class Main {
 
-    private static int CONST_VAL;
-    private IOLibrary specialist;
-    private static int MINUS_NINE = -9;
-    private static int SET_OF_DOMINOES = 28;
     private static final int NUMBER_COL = 8;
     private static final int NUMBER_ROW = 7;
     private static final int CONST_MINUS_7 = -7;
     private static final int MAX_DOMINOES_VAL = 9;
-    private int x;
+
+    private static int MINUS_NINE = -9;
+    private static int CONST_VAL;
     private static String playerName;
+    private static int SET_OF_DOMINOES = 28;
+
+    private IOLibrary specialist;
+
     public List<Domino> dominoes;
     public List<Domino> guessDominoes;
     public int[][] grid = new int[NUMBER_ROW][NUMBER_COL];
     public int[][] gg = new int[NUMBER_ROW][NUMBER_COL];
-    public int mode = -1;
-    int cf;
-    int score;
-    long startTime;
 
+    public int mode = -1;
+    private int x;
+    private int cf;
+    private int score;
+    private long startTime;
+    public final int ZERO = 0;
 
     PictureFrame pf = new PictureFrame();
 
-    public final int ZERO = 0;
+
 
 
     public void run() {
@@ -50,7 +55,6 @@ public class Main {
 
         displayWelcomeMessage();
         getPlayerName();
-        //playerName = getPlayerName();
 
         CONST_VAL = MINUS_NINE;
 
@@ -81,8 +85,6 @@ public class Main {
                     break;*/
 
                 case 1: {
-
-                    //selectDifficulty();
 
                     int difficulty = selectDifficulty();
 
@@ -487,6 +489,8 @@ public class Main {
     }
 
     private void placeDemino() {
+
+
         System.out.println("Where will the top left of the domino be?");
         System.out.println("Column?");
         // make sure the user enters something valid
@@ -590,20 +594,6 @@ public class Main {
     }
 
 
-/*    private void selectDifficulty() {
-
-        System.out.println();
-        String h4 = "Select difficulty";
-        String u4 = h4.replaceAll(".", "=");
-        System.out.println(u4);
-        System.out.println(h4);
-        System.out.println(u4);
-        System.out.println("1) Simples");
-        System.out.println("2) Not-so-simples");
-        System.out.println("3) Super-duper-shuffled");
-
-    }*/
-
     private void getInspiration() {
 
         int index = (int) new Random().nextInt(11);
@@ -614,7 +604,6 @@ public class Main {
                 System.out.printf("%s said \"%s\"", inspiration.getAuthor(), inspiration.getInspireText());
             }
         }
-
 
         System.out.println();
         System.out.println();

@@ -12,6 +12,13 @@ import java.io.InputStreamReader;
  */
 
 public class Location extends SpacePlace {
+
+  private static final int CONST_20 = 20;
+  private static final int MAX_WIDTH = 180;
+  private static final int MAX_HEIGHT = 160;
+  private static final int ROW = 7;
+  private static final int COLUMN = 8;
+
   public int c;
   public int r;
   public DIRECTION d;
@@ -40,11 +47,11 @@ public class Location extends SpacePlace {
   
   public void drawGridLines(Graphics g) {
     g.setColor(Color.LIGHT_GRAY);
-    for (tmp = 0; tmp <= 7; tmp++) {
-      g.drawLine(20, 20 + tmp * 20, 180, 20 + tmp * 20);
+    for (tmp = 0; tmp <= ROW; tmp++) {
+      g.drawLine(CONST_20, CONST_20 + tmp * CONST_20, MAX_WIDTH, CONST_20 + tmp * CONST_20);
     }
-    for (int see = 0; see <= 8; see++) {
-      g.drawLine(20 + see * 20, 20, 20 + see * 20, 160);
+    for (int see = 0; see <= COLUMN; see++) {
+      g.drawLine(CONST_20 + see * CONST_20, CONST_20, CONST_20 + see * CONST_20, MAX_HEIGHT);
     }
   }
   
