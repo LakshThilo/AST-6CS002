@@ -170,42 +170,10 @@ public class Main {
                             //break;
 
                             case 5:
-                                System.out.println("Enter a position that the domino occupies");
-                                System.out.println("Column?");
 
-                                int x13 = MINUS_NINE;
-                                while (x13 < 1 || x13 > NUMBER_COL) {
-                                    try {
-                                        String s3 = specialist.getString();
-                                        x13 = Integer.parseInt(s3);
-                                    } catch (Exception e) {
-                                        x13 = CONST_MINUS_7;
-                                    }
-                                }
-                                System.out.println("Row?");
-                                int y13 = MINUS_NINE;
-                                while (y13 < 1 || y13 > NUMBER_ROW) {
-                                    try {
-                                        String s3 = specialist.getString();
-                                        y13 = Integer.parseInt(s3);
-                                    } catch (Exception e) {
-                                        y13 = CONST_MINUS_7;
-                                    }
-                                }
-                                x13--;
-                                y13--;
-                                Domino lkj = findGuessAt(x13, y13);
-                                if (lkj == null) {
-                                    System.out.println("Couln't find a domino there");
-                                } else {
-                                    lkj.placed = false;
-                                    gg[lkj.hy][lkj.hx] = MAX_DOMINOES_VAL;
-                                    gg[lkj.ly][lkj.lx] = MAX_DOMINOES_VAL;
-                                    score -= 1000;
-                                    collateGuessGrid();
-                                    pf.dp.repaint();
-                                }
+                                unplaceDemino();
                                 break;
+
                             case 7:
                                 System.out.printf("%s your score is %d\n", playerName, score);
                                 break;
@@ -412,6 +380,44 @@ public class Main {
 
         }
 
+    }
+
+    private void unplaceDemino() {
+        System.out.println("Enter a position that the domino occupies");
+        System.out.println("Column?");
+
+        int x13 = MINUS_NINE;
+        while (x13 < 1 || x13 > NUMBER_COL) {
+            try {
+                String s3 = specialist.getString();
+                x13 = Integer.parseInt(s3);
+            } catch (Exception e) {
+                x13 = CONST_MINUS_7;
+            }
+        }
+        System.out.println("Row?");
+        int y13 = MINUS_NINE;
+        while (y13 < 1 || y13 > NUMBER_ROW) {
+            try {
+                String s3 = specialist.getString();
+                y13 = Integer.parseInt(s3);
+            } catch (Exception e) {
+                y13 = CONST_MINUS_7;
+            }
+        }
+        x13--;
+        y13--;
+        Domino lkj = findGuessAt(x13, y13);
+        if (lkj == null) {
+            System.out.println("Couln't find a domino there");
+        } else {
+            lkj.placed = false;
+            gg[lkj.hy][lkj.hx] = MAX_DOMINOES_VAL;
+            gg[lkj.ly][lkj.lx] = MAX_DOMINOES_VAL;
+            score -= 1000;
+            collateGuessGrid();
+            pf.dp.repaint();
+        }
     }
 
     private void placeDemino() {
