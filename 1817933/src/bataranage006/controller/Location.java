@@ -21,27 +21,27 @@ public class Location extends SpacePlace {
 
   public int column;
   public int row;
-  public DIRECTION d;
+  public Direction direction;
   public int tmp;
-  public enum DIRECTION {VERTICAL, HORIZONTAL};
+  //public enum DIRECTION {VERTICAL, HORIZONTAL};
   
   public Location(int row, int column) {
     this.row = row;
     this.column = column;
   }
 
-  public Location(int row, int column, DIRECTION d) {
+  public Location(int row, int column, Direction direction) {
     this(row, column);
-    this.d=d;
+    this.direction = direction;
   }
   
   public String toString() {
-    if(d==null){
+    if(direction ==null){
       tmp = column + 1;
       return "(" + (tmp) + "," + (row +1) + ")";
     } else {
       tmp = column + 1;
-      return "(" + (tmp) + "," + (row +1) + "," + d + ")";
+      return "(" + (tmp) + "," + (row +1) + "," + direction + ")";
     }
   }
   
