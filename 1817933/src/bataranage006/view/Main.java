@@ -46,8 +46,6 @@ public class Main {
     PictureFrame pf = new PictureFrame();
 
 
-
-
     public void run() {
 
 
@@ -220,6 +218,7 @@ public class Main {
     }
 
     private int selectDifficulty() {
+
         System.out.println();
         String h4 = "Select difficulty";
         String u4 = h4.replaceAll(".", "=");
@@ -230,16 +229,16 @@ public class Main {
         System.out.println("2) Not-so-simples");
         System.out.println("3) Super-duper-shuffled");
 
-        int c2 = CONST_MINUS_7;
-        while (!(c2 == 1 || c2 == 2 || c2 == 3)) {
+        int difficulty = CONST_MINUS_7;
+        while (!(difficulty == 1 || difficulty == 2 || difficulty == 3)) {
             try {
                 String s2 = specialist.getString();
-                c2 = Integer.parseInt(s2);
+                difficulty = Integer.parseInt(s2);
             } catch (Exception e) {
-                c2 = CONST_MINUS_7;
+                difficulty = CONST_MINUS_7;
             }
         }
-        return c2;
+        return difficulty;
     }
 
     private int displayPlayMenu() {
