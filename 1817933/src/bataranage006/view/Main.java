@@ -190,6 +190,7 @@ public class Main {
                                 System.out.println("4) Find all possibilities (costs you 10000)");
                                 System.out.println("0) You have changed your mind about cheating");
                                 System.out.println("What do you want to do?");
+
                                 int yy = MINUS_NINE;
                                 while (yy < 0 || yy > 4) {
                                     try {
@@ -200,7 +201,8 @@ public class Main {
                                     }
                                 }
                                 switch (yy) {
-                                    case 0:
+
+                                    case 0: {
                                         switch (cf) {
                                             case 0:
                                                 System.out.println("Well done");
@@ -231,34 +233,17 @@ public class Main {
                                                 }
                                         }
                                         break;
-                                    case 1:
-                                        score -= 500;
-                                        System.out.println("Which domino?");
-                                        System.out.println("Number on one side?");
-                                        int x4 = MINUS_NINE;
-                                        while (x4 < 0 || x4 > 6) {
-                                            try {
-                                                String s3 = specialist.getString();
-                                                x4 = Integer.parseInt(s3);
-                                            } catch (Exception e) {
-                                                x4 = CONST_MINUS_7;
-                                            }
-                                        }
-                                        System.out.println("Number on the other side?");
-                                        int x5 = MINUS_NINE;
-                                        while (x5 < 0 || x5 > 6) {
-                                            try {
-                                                String s3 = IOLibrary.getString();
-                                                x5 = Integer.parseInt(s3);
-                                            } catch (Exception e) {
-                                                x5 = CONST_MINUS_7;
-                                            }
-                                        }
-                                        Domino dd = findDominoByLH(x5, x4);
-                                        System.out.println(dd);
+
+                                    }
+
+                                    case 1: {
+
+                                        findParticularDomino();
 
                                         break;
-                                    case 2:
+                                    }
+
+                                    case 2: {
                                         score -= 500;
                                         System.out.println("Which location?");
                                         System.out.println("Column?");
@@ -286,6 +271,8 @@ public class Main {
                                         Domino lkj2 = findDominoAt(x3, y3);
                                         System.out.println(lkj2);
                                         break;
+                                    }
+
                                     case 3: {
                                         score -= 2000;
                                         HashMap<Domino, List<Location>> map = new HashMap<Domino, List<Location>>();
@@ -380,6 +367,33 @@ public class Main {
 
         }
 
+    }
+
+    private void findParticularDomino() {
+        score -= 500;
+        System.out.println("Which domino?");
+        System.out.println("Number on one side?");
+        int x4 = MINUS_NINE;
+        while (x4 < 0 || x4 > 6) {
+            try {
+                String s3 = specialist.getString();
+                x4 = Integer.parseInt(s3);
+            } catch (Exception e) {
+                x4 = CONST_MINUS_7;
+            }
+        }
+        System.out.println("Number on the other side?");
+        int x5 = MINUS_NINE;
+        while (x5 < 0 || x5 > 6) {
+            try {
+                String s3 = IOLibrary.getString();
+                x5 = Integer.parseInt(s3);
+            } catch (Exception e) {
+                x5 = CONST_MINUS_7;
+            }
+        }
+        Domino dd = findDominoByLH(x5, x4);
+        System.out.println(dd);
     }
 
     private void unplaceDemino() {
