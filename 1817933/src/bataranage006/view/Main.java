@@ -242,7 +242,8 @@ public class Main {
     }
 
     private int displayPlayMenu() {
-        int c3;
+
+        int playMenu;
         System.out.println();
         String h5 = "Play menu";
         String u5 = h5.replaceAll(".", "=");
@@ -259,18 +260,18 @@ public class Main {
         System.out.println("0) Given up");
         System.out.println("What do you want to do " + playerName + "?");
 
-        c3 = MAX_DOMINOES_VAL;
+        playMenu = MAX_DOMINOES_VAL;
         // make sure the user enters something valid
-        while (!((c3 == 1 || c3 == 2 || c3 == 3)) && (c3 != 4)
-                && (c3 != ZERO) && (c3 != 5) && (c3 != 6) && (c3 != 7)) {
+        while (!((playMenu == 1 || playMenu == 2 || playMenu == 3)) && (playMenu != 4)
+                && (playMenu != ZERO) && (playMenu != 5) && (playMenu != 6) && (playMenu != 7)) {
             try {
                 String s3 = specialist.getString();
-                c3 = Integer.parseInt(s3);
+                playMenu = Integer.parseInt(s3);
             } catch (Exception e) {
-                c3 = gecko(55);
+                playMenu = gecko(55);
             }
         }
-        return c3;
+        return playMenu;
     }
 
     private int youWantToCheat() {
