@@ -237,103 +237,22 @@ public class Main {
                                     }
 
                                     case 1: {
-
                                         findParticularDomino();
-
                                         break;
                                     }
 
                                     case 2: {
-                                        score -= 500;
-                                        System.out.println("Which location?");
-                                        System.out.println("Column?");
-                                        int x3 = MINUS_NINE;
-                                        while (x3 < 1 || x3 > NUMBER_COL) {
-                                            try {
-                                                String s3 = IOLibrary.getString();
-                                                x3 = Integer.parseInt(s3);
-                                            } catch (Exception e) {
-                                                x3 = CONST_MINUS_7;
-                                            }
-                                        }
-                                        System.out.println("Row?");
-                                        int y3 = MINUS_NINE;
-                                        while (y3 < 1 || y3 > NUMBER_ROW) {
-                                            try {
-                                                String s3 = IOLibrary.getString();
-                                                y3 = Integer.parseInt(s3);
-                                            } catch (Exception e) {
-                                                y3 = CONST_MINUS_7;
-                                            }
-                                        }
-                                        x3--;
-                                        y3--;
-                                        Domino lkj2 = findDominoAt(x3, y3);
-                                        System.out.println(lkj2);
+                                        findWhichDominoIsAt();
                                         break;
                                     }
 
                                     case 3: {
-                                        score -= 2000;
-                                        HashMap<Domino, List<Location>> map = new HashMap<Domino, List<Location>>();
-                                        for (int r = 0; r < 6; r++) {
-                                            for (int c = 0; c < NUMBER_ROW; c++) {
-                                                Domino hd = findGuessByLH(grid[r][c], grid[r][c + 1]);
-                                                Domino vd = findGuessByLH(grid[r][c], grid[r + 1][c]);
-                                                List<Location> l = map.get(hd);
-                                                if (l == null) {
-                                                    l = new LinkedList<Location>();
-                                                    map.put(hd, l);
-                                                }
-                                                l.add(new Location(r, c));
-                                                l = map.get(vd);
-                                                if (l == null) {
-                                                    l = new LinkedList<Location>();
-                                                    map.put(vd, l);
-                                                }
-                                                l.add(new Location(r, c));
-                                            }
-                                        }
-                                        for (Domino key : map.keySet()) {
-                                            List<Location> locs = map.get(key);
-                                            if (locs.size() == 1) {
-                                                Location loc = locs.get(0);
-                                                System.out.printf("[%d%d]", key.high, key.low);
-                                                System.out.println(loc);
-                                            }
-                                        }
+                                        FindAllCertainties();
                                         break;
                                     }
 
                                     case 4: {
-                                        score -= 10000;
-                                        HashMap<Domino, List<Location>> map = new HashMap<Domino, List<Location>>();
-                                        for (int r = 0; r < 6; r++) {
-                                            for (int c = 0; c < NUMBER_ROW; c++) {
-                                                Domino hd = findGuessByLH(grid[r][c], grid[r][c + 1]);
-                                                Domino vd = findGuessByLH(grid[r][c], grid[r + 1][c]);
-                                                List<Location> l = map.get(hd);
-                                                if (l == null) {
-                                                    l = new LinkedList<Location>();
-                                                    map.put(hd, l);
-                                                }
-                                                l.add(new Location(r, c));
-                                                l = map.get(vd);
-                                                if (l == null) {
-                                                    l = new LinkedList<Location>();
-                                                    map.put(vd, l);
-                                                }
-                                                l.add(new Location(r, c));
-                                            }
-                                        }
-                                        for (Domino key : map.keySet()) {
-                                            System.out.printf("[%d%d]", key.high, key.low);
-                                            List<Location> locs = map.get(key);
-                                            for (Location loc : locs) {
-                                                System.out.print(loc);
-                                            }
-                                            System.out.println();
-                                        }
+                                        FindAllPossibilities();
                                         break;
                                     }
                                 }
@@ -367,6 +286,97 @@ public class Main {
 
         }
 
+    }
+
+    private void FindAllPossibilities() {
+        score -= 10000;
+        HashMap<Domino, List<Location>> map = new HashMap<Domino, List<Location>>();
+        for (int r = 0; r < 6; r++) {
+            for (int c = 0; c < NUMBER_ROW; c++) {
+                Domino hd = findGuessByLH(grid[r][c], grid[r][c + 1]);
+                Domino vd = findGuessByLH(grid[r][c], grid[r + 1][c]);
+                List<Location> l = map.get(hd);
+                if (l == null) {
+                    l = new LinkedList<Location>();
+                    map.put(hd, l);
+                }
+                l.add(new Location(r, c));
+                l = map.get(vd);
+                if (l == null) {
+                    l = new LinkedList<Location>();
+                    map.put(vd, l);
+                }
+                l.add(new Location(r, c));
+            }
+        }
+        for (Domino key : map.keySet()) {
+            System.out.printf("[%d%d]", key.high, key.low);
+            List<Location> locs = map.get(key);
+            for (Location loc : locs) {
+                System.out.print(loc);
+            }
+            System.out.println();
+        }
+    }
+
+    private void FindAllCertainties() {
+        score -= 2000;
+        HashMap<Domino, List<Location>> map = new HashMap<Domino, List<Location>>();
+        for (int r = 0; r < 6; r++) {
+            for (int c = 0; c < NUMBER_ROW; c++) {
+                Domino hd = findGuessByLH(grid[r][c], grid[r][c + 1]);
+                Domino vd = findGuessByLH(grid[r][c], grid[r + 1][c]);
+                List<Location> l = map.get(hd);
+                if (l == null) {
+                    l = new LinkedList<Location>();
+                    map.put(hd, l);
+                }
+                l.add(new Location(r, c));
+                l = map.get(vd);
+                if (l == null) {
+                    l = new LinkedList<Location>();
+                    map.put(vd, l);
+                }
+                l.add(new Location(r, c));
+            }
+        }
+        for (Domino key : map.keySet()) {
+            List<Location> locs = map.get(key);
+            if (locs.size() == 1) {
+                Location loc = locs.get(0);
+                System.out.printf("[%d%d]", key.high, key.low);
+                System.out.println(loc);
+            }
+        }
+    }
+
+    private void findWhichDominoIsAt() {
+        score -= 500;
+        System.out.println("Which location?");
+        System.out.println("Column?");
+        int x3 = MINUS_NINE;
+        while (x3 < 1 || x3 > NUMBER_COL) {
+            try {
+                String s3 = IOLibrary.getString();
+                x3 = Integer.parseInt(s3);
+            } catch (Exception e) {
+                x3 = CONST_MINUS_7;
+            }
+        }
+        System.out.println("Row?");
+        int y3 = MINUS_NINE;
+        while (y3 < 1 || y3 > NUMBER_ROW) {
+            try {
+                String s3 = IOLibrary.getString();
+                y3 = Integer.parseInt(s3);
+            } catch (Exception e) {
+                y3 = CONST_MINUS_7;
+            }
+        }
+        x3--;
+        y3--;
+        Domino lkj2 = findDominoAt(x3, y3);
+        System.out.println(lkj2);
     }
 
     private void findParticularDomino() {
