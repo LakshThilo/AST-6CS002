@@ -275,6 +275,7 @@ public class Main {
     }
 
     private int youWantToCheat() {
+
         System.out.println();
         String h8 = "So you want to cheat, huh?";
         String u8 = h8.replaceAll(".", "=");
@@ -288,16 +289,16 @@ public class Main {
         System.out.println("0) You have changed your mind about cheating");
         System.out.println("What do you want to do?");
 
-        int yy = MINUS_NINE;
-        while (yy < 0 || yy > 4) {
+        int toCheat = MINUS_NINE;
+        while (toCheat < 0 || toCheat > 4) {
             try {
                 String s3 = specialist.getString();
-                yy = Integer.parseInt(s3);
+                toCheat = Integer.parseInt(s3);
             } catch (Exception e) {
-                yy = CONST_MINUS_7;
+                toCheat = CONST_MINUS_7;
             }
         }
-        return yy;
+        return toCheat;
     }
 
     private void changedYourMindAboutCheating() {
