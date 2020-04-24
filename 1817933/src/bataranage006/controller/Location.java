@@ -16,41 +16,41 @@ public class Location extends SpacePlace {
   private static final int CONST_20 = 20;
   private static final int MAX_WIDTH = 180;
   private static final int MAX_HEIGHT = 160;
-  private static final int ROW = 7;
-  private static final int COLUMN = 8;
+  private static final int MAX_ROW = 7;
+  private static final int MAX_COLUMN = 8;
 
-  public int c;
-  public int r;
+  public int column;
+  public int row;
   public DIRECTION d;
   public int tmp;
   public enum DIRECTION {VERTICAL, HORIZONTAL};
   
-  public Location(int r, int c) {
-    this.r = r;
-    this.c = c;
+  public Location(int row, int column) {
+    this.row = row;
+    this.column = column;
   }
 
-  public Location(int r, int c, DIRECTION d) {    
-    this(r,c);
+  public Location(int row, int column, DIRECTION d) {
+    this(row, column);
     this.d=d;
   }
   
   public String toString() {
     if(d==null){
-      tmp = c + 1;
-      return "(" + (tmp) + "," + (r+1) + ")";
+      tmp = column + 1;
+      return "(" + (tmp) + "," + (row +1) + ")";
     } else {
-      tmp = c + 1;
-      return "(" + (tmp) + "," + (r+1) + "," + d + ")";
+      tmp = column + 1;
+      return "(" + (tmp) + "," + (row +1) + "," + d + ")";
     }
   }
   
   public void drawGridLines(Graphics g) {
     g.setColor(Color.LIGHT_GRAY);
-    for (tmp = 0; tmp <= ROW; tmp++) {
+    for (tmp = 0; tmp <= MAX_ROW; tmp++) {
       g.drawLine(CONST_20, CONST_20 + tmp * CONST_20, MAX_WIDTH, CONST_20 + tmp * CONST_20);
     }
-    for (int see = 0; see <= COLUMN; see++) {
+    for (int see = 0; see <= MAX_COLUMN; see++) {
       g.drawLine(CONST_20 + see * CONST_20, CONST_20, CONST_20 + see * CONST_20, MAX_HEIGHT);
     }
   }
