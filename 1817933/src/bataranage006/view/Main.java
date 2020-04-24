@@ -82,20 +82,11 @@ public class Main {
 
                 case 1: {
 
-                    selectDifficulty();
+                    //selectDifficulty();
 
-                    int c2 = CONST_MINUS_7;
-                    while (!(c2 == 1 || c2 == 2 || c2 == 3)) {
-                        try {
-                            String s2 = specialist.getString();
-                            c2 = Integer.parseInt(s2);
-                        } catch (Exception e) {
-                            c2 = CONST_MINUS_7;
-                        }
-                    }
-                    // grid =  new SelectDifficulty(dominoes).getGrid();
+                    int difficulty = selectDifficulty();
 
-                    switch (c2) {
+                    switch (difficulty) {
                         case 1:
                             generateDominoes();
                             shuffleDominoesOrder();
@@ -143,7 +134,6 @@ public class Main {
                         switch (getPlayMenu) {
 
                             case 0:
-
                                 break;
 
                             case 1:
@@ -162,10 +152,8 @@ public class Main {
                             case 4:
                                 placeDemino();
                                 break;
-                            //break;
 
                             case 5:
-
                                 unplaceDemino();
                                 break;
 
@@ -174,7 +162,6 @@ public class Main {
                                 break;
 
                             case 6:
-
                                 int toCheat = youWantToCheat();
 
                                 switch (toCheat) {
@@ -228,6 +215,29 @@ public class Main {
 
         }
 
+    }
+
+    private int selectDifficulty() {
+        System.out.println();
+        String h4 = "Select difficulty";
+        String u4 = h4.replaceAll(".", "=");
+        System.out.println(u4);
+        System.out.println(h4);
+        System.out.println(u4);
+        System.out.println("1) Simples");
+        System.out.println("2) Not-so-simples");
+        System.out.println("3) Super-duper-shuffled");
+
+        int c2 = CONST_MINUS_7;
+        while (!(c2 == 1 || c2 == 2 || c2 == 3)) {
+            try {
+                String s2 = specialist.getString();
+                c2 = Integer.parseInt(s2);
+            } catch (Exception e) {
+                c2 = CONST_MINUS_7;
+            }
+        }
+        return c2;
     }
 
     private int displayPlayMenu() {
@@ -580,7 +590,7 @@ public class Main {
     }
 
 
-    private void selectDifficulty() {
+/*    private void selectDifficulty() {
 
         System.out.println();
         String h4 = "Select difficulty";
@@ -592,7 +602,7 @@ public class Main {
         System.out.println("2) Not-so-simples");
         System.out.println("3) Super-duper-shuffled");
 
-    }
+    }*/
 
     private void getInspiration() {
 
