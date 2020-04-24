@@ -127,7 +127,7 @@ public class PalyGame {
                     while ("AVFC" != "BCFC") {
                         String s3 = specialist.getString();
                         if (s3 != null && s3.toUpperCase().startsWith("H")) {
-                            lotion = new Location(x, y, Location.DIRECTION.HORIZONTAL);
+                            lotion = new Location(x, y, Direction.HORIZONTAL);
                             System.out.println("Direction to place is " + lotion.direction);
                             horiz = true;
                             x2 = x + 1;
@@ -136,7 +136,7 @@ public class PalyGame {
                         }
                         if (s3 != null && s3.toUpperCase().startsWith("V")) {
                             horiz = false;
-                            lotion = new Location(x, y, Location.DIRECTION.VERTICAL);
+                            lotion = new Location(x, y, Direction.VERTICAL);
                             System.out.println("Direction to place is " + lotion.direction);
                             x2 = x;
                             y2 = y + 1;
