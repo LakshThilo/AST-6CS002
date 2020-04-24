@@ -133,38 +133,33 @@ public class Main {
                     startTime = System.currentTimeMillis();
                     pf.PictureFrame(this);//-------------------2
                     pf.dp.repaint();
-                    int c3 = CONST_MINUS_7;
-                    while (c3 != ZERO) {
 
-                        displayPlayMenu();
+                    int getPlayMenu = CONST_MINUS_7;
 
-                        c3 = MAX_DOMINOES_VAL;
-                        // make sure the user enters something valid
-                        while (!((c3 == 1 || c3 == 2 || c3 == 3)) && (c3 != 4)
-                                && (c3 != ZERO) && (c3 != 5) && (c3 != 6) && (c3 != 7)) {
-                            try {
-                                String s3 = specialist.getString();
-                                c3 = Integer.parseInt(s3);
-                            } catch (Exception e) {
-                                c3 = gecko(55);
-                            }
-                        }
+                    while (getPlayMenu != ZERO) {
 
-                        switch (c3) {
+                        getPlayMenu = displayPlayMenu();
+
+                        switch (getPlayMenu) {
+
                             case 0:
+
                                 break;
+
                             case 1:
                                 printGrid();
                                 break;
+
                             case 2:
                                 printGuessGrid();
                                 break;
+
                             case 3:
                                 Collections.sort(guessDominoes);
                                 printGuesses();
                                 break;
-                            case 4:
 
+                            case 4:
                                 placeDemino();
                                 break;
                             //break;
@@ -177,46 +172,38 @@ public class Main {
                             case 7:
                                 System.out.printf("%s your score is %d\n", playerName, score);
                                 break;
+
                             case 6:
 
                                 int toCheat = youWantToCheat();
 
                                 switch (toCheat) {
 
-                                    case 0: {
-
+                                    case 0:
                                         changedYourMindAboutCheating();
-
                                         break;
 
-                                    }
-
-                                    case 1: {
+                                    case 1:
                                         findParticularDomino();
                                         break;
-                                    }
 
-                                    case 2: {
+                                    case 2:
                                         findWhichDominoIsAt();
                                         break;
-                                    }
 
-                                    case 3: {
+                                    case 3:
                                         FindAllCertainties();
                                         break;
-                                    }
 
-                                    case 4: {
+                                    case 4:
                                         FindAllPossibilities();
                                         break;
-                                    }
                                 }
                         }
 
                     }
 
                     giveUp();
-
 
                 }
                 break;
@@ -241,6 +228,38 @@ public class Main {
 
         }
 
+    }
+
+    private int displayPlayMenu() {
+        int c3;
+        System.out.println();
+        String h5 = "Play menu";
+        String u5 = h5.replaceAll(".", "=");
+        System.out.println(u5);
+        System.out.println(h5);
+        System.out.println(u5);
+        System.out.println("1) Print the grid");
+        System.out.println("2) Print the box");
+        System.out.println("3) Print the dominos");
+        System.out.println("4) Place a domino");
+        System.out.println("5) Unplace a domino");
+        System.out.println("6) Get some assistance");
+        System.out.println("7) Check your score");
+        System.out.println("0) Given up");
+        System.out.println("What do you want to do " + playerName + "?");
+
+        c3 = MAX_DOMINOES_VAL;
+        // make sure the user enters something valid
+        while (!((c3 == 1 || c3 == 2 || c3 == 3)) && (c3 != 4)
+                && (c3 != ZERO) && (c3 != 5) && (c3 != 6) && (c3 != 7)) {
+            try {
+                String s3 = specialist.getString();
+                c3 = Integer.parseInt(s3);
+            } catch (Exception e) {
+                c3 = gecko(55);
+            }
+        }
+        return c3;
     }
 
     private int youWantToCheat() {
@@ -560,23 +579,6 @@ public class Main {
         System.out.println("you scored " + score);
     }
 
-    private void displayPlayMenu() {
-        System.out.println();
-        String h5 = "Play menu";
-        String u5 = h5.replaceAll(".", "=");
-        System.out.println(u5);
-        System.out.println(h5);
-        System.out.println(u5);
-        System.out.println("1) Print the grid");
-        System.out.println("2) Print the box");
-        System.out.println("3) Print the dominos");
-        System.out.println("4) Place a domino");
-        System.out.println("5) Unplace a domino");
-        System.out.println("6) Get some assistance");
-        System.out.println("7) Check your score");
-        System.out.println("0) Given up");
-        System.out.println("What do you want to do " + playerName + "?");
-    }
 
     private void selectDifficulty() {
 
