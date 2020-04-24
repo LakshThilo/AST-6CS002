@@ -178,60 +178,15 @@ public class Main {
                                 System.out.printf("%s your score is %d\n", playerName, score);
                                 break;
                             case 6:
-                                System.out.println();
-                                String h8 = "So you want to cheat, huh?";
-                                String u8 = h8.replaceAll(".", "=");
-                                System.out.println(u8);
-                                System.out.println(h8);
-                                System.out.println(u8);
-                                System.out.println("1) Find a particular Domino (costs you 500)");
-                                System.out.println("2) Which domino is at ... (costs you 500)");
-                                System.out.println("3) Find all certainties (costs you 2000)");
-                                System.out.println("4) Find all possibilities (costs you 10000)");
-                                System.out.println("0) You have changed your mind about cheating");
-                                System.out.println("What do you want to do?");
 
-                                int yy = MINUS_NINE;
-                                while (yy < 0 || yy > 4) {
-                                    try {
-                                        String s3 = specialist.getString();
-                                        yy = Integer.parseInt(s3);
-                                    } catch (Exception e) {
-                                        yy = CONST_MINUS_7;
-                                    }
-                                }
-                                switch (yy) {
+                                int toCheat = youWantToCheat();
+
+                                switch (toCheat) {
 
                                     case 0: {
-                                        switch (cf) {
-                                            case 0:
-                                                System.out.println("Well done");
-                                                System.out.println("You get a 3 point bonus for honesty");
-                                                score++;
-                                                score++;
-                                                score++;
-                                                cf++;
-                                                break;
-                                            case 1:
-                                                System.out
-                                                        .println("So you though you could get the 3 point bonus twice");
-                                                System.out.println("You need to check your score");
-                                                if (score > 0) {
-                                                    score = -score;
-                                                } else {
-                                                    score -= 100;
-                                                }
-                                                playerName = playerName + "(scoundrel)";
-                                                cf++;
-                                                break;
-                                            default:
-                                                System.out.println("Some people just don't learn");
-                                                playerName = playerName.replace("scoundrel",
-                                                        "pathetic scoundrel");
-                                                for (int i = 0; i < 10000; i++) {
-                                                    score--;
-                                                }
-                                        }
+
+                                        changedYourMindAboutCheating();
+
                                         break;
 
                                     }
@@ -286,6 +241,64 @@ public class Main {
 
         }
 
+    }
+
+    private int youWantToCheat() {
+        System.out.println();
+        String h8 = "So you want to cheat, huh?";
+        String u8 = h8.replaceAll(".", "=");
+        System.out.println(u8);
+        System.out.println(h8);
+        System.out.println(u8);
+        System.out.println("1) Find a particular Domino (costs you 500)");
+        System.out.println("2) Which domino is at ... (costs you 500)");
+        System.out.println("3) Find all certainties (costs you 2000)");
+        System.out.println("4) Find all possibilities (costs you 10000)");
+        System.out.println("0) You have changed your mind about cheating");
+        System.out.println("What do you want to do?");
+
+        int yy = MINUS_NINE;
+        while (yy < 0 || yy > 4) {
+            try {
+                String s3 = specialist.getString();
+                yy = Integer.parseInt(s3);
+            } catch (Exception e) {
+                yy = CONST_MINUS_7;
+            }
+        }
+        return yy;
+    }
+
+    private void changedYourMindAboutCheating() {
+        switch (cf) {
+            case 0:
+                System.out.println("Well done");
+                System.out.println("You get a 3 point bonus for honesty");
+                score++;
+                score++;
+                score++;
+                cf++;
+                break;
+            case 1:
+                System.out
+                        .println("So you though you could get the 3 point bonus twice");
+                System.out.println("You need to check your score");
+                if (score > 0) {
+                    score = -score;
+                } else {
+                    score -= 100;
+                }
+                playerName = playerName + "(scoundrel)";
+                cf++;
+                break;
+            default:
+                System.out.println("Some people just don't learn");
+                playerName = playerName.replace("scoundrel",
+                        "pathetic scoundrel");
+                for (int i = 0; i < 10000; i++) {
+                    score--;
+                }
+        }
     }
 
     private void FindAllPossibilities() {
