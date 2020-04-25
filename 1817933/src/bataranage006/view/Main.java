@@ -39,7 +39,7 @@ public class Main {
     public int mode = -1;
     private int x;
     private int cf;
-    private int score;
+    private static int score;
     private long startTime;
     public final int ZERO = 0;
 
@@ -340,19 +340,8 @@ public class Main {
 
 
     private void recordTheScore() {
-        try {
-            PrintWriter pw = new PrintWriter(new FileWriter("score.txt", true));
-            String n = playerName.replaceAll(",", "_");
-            pw.print(n);
-            pw.print(",");
-            pw.print(score);
-            pw.print(",");
-            pw.println(System.currentTimeMillis());
-            pw.flush();
-            pw.close();
-        } catch (Exception e) {
-            System.out.println("Something went wrong saving scores");
-        }
+
+        new ScoreRecorder(playerName,score);
     }
 
 
