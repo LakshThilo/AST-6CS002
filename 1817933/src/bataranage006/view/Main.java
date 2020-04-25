@@ -25,7 +25,6 @@ public class Main {
     private static final int MAX_DOMINOES_VAL = 9;
 
     private static int MINUS_NINE = -9;
-    private static int CONST_VAL;
     private static String playerName;
     private static int SET_OF_DOMINOES = 28;
 
@@ -54,65 +53,23 @@ public class Main {
         displayWelcomeMessage();
         getPlayerName();
 
-        CONST_VAL = MINUS_NINE;
+        int getMainMenu = MINUS_NINE;
 
-        while (CONST_VAL != ZERO) {
+        while (getMainMenu != ZERO) {
 
-            displayMainMenu();
+            getMainMenu = displayMainMenu();
 
-            CONST_VAL = MINUS_NINE;
-            while (CONST_VAL == MINUS_NINE) {
-                try {
-                    String s1 = specialist.getString();
-                    CONST_VAL = Integer.parseInt(s1);
-
-                } catch (Exception e) {
-
-                    CONST_VAL = MINUS_NINE;
-                }
-            }
-            switch (CONST_VAL) {
+            switch (getMainMenu) {
 
                 case 0:
                     quiteGame();
                     break;
 
-              /*  case 1:
-                    new PalyGame(this, playerName);
-                    giveUp();
-                    break;*/
-
                 case 1: {
 
                     int difficulty = selectDifficulty();
 
-                    switch (difficulty) {
-                        case 1:
-                            generateDominoes();
-                            shuffleDominoesOrder();
-                            placeDominoes();
-                            collateGrid();
-                            // printGrid();
-                            break;
-                        case 2:
-                            generateDominoes();
-                            shuffleDominoesOrder();
-                            placeDominoes();
-                            rotateDominoes();
-                            collateGrid();
-                            // printGrid();
-                            break;
-                        default:
-                            generateDominoes();
-                            shuffleDominoesOrder();
-                            placeDominoes();
-                            rotateDominoes();
-                            rotateDominoes();
-                            rotateDominoes();
-                            invertSomeDominoes();
-                            collateGrid();
-                            break;
-                    }
+                    new FindDifficulty(difficulty).invoke();
 
                     printGrid();
                     generateGuesses();
@@ -215,6 +172,36 @@ public class Main {
 
         }
 
+    }
+
+    private int displayMainMenu() {
+        int CONST_VAL;
+        System.out.println();
+        String h1 = "Main menu";
+        String u1 = h1.replaceAll(".", "=");
+        System.out.println(u1);
+        System.out.println(h1);
+        System.out.println(u1);
+
+        System.out.println("1) Play");
+        System.out.println("2) View high scores");
+        System.out.println("3) View rules");
+        // System.out.println("4) Multiplayer play");
+        System.out.println("5) Get inspiration");
+        System.out.println("0) Quit");
+
+        CONST_VAL = MINUS_NINE;
+        while (CONST_VAL == MINUS_NINE) {
+            try {
+                String s1 = specialist.getString();
+                CONST_VAL = Integer.parseInt(s1);
+
+            } catch (Exception e) {
+
+                CONST_VAL = MINUS_NINE;
+            }
+        }
+        return CONST_VAL;
     }
 
     private int selectDifficulty() {
@@ -646,7 +633,7 @@ public class Main {
         System.exit(0);
     }
 
-    private void displayMainMenu() {
+/*    private void displayMainMenu() {
 
         System.out.println();
         String h1 = "Main menu";
@@ -661,7 +648,7 @@ public class Main {
         // System.out.println("4) Multiplayer play");
         System.out.println("5) Get inspiration");
         System.out.println("0) Quit");
-    }
+    }*/
 
     private String getPlayerName() {
 
@@ -679,31 +666,6 @@ public class Main {
         System.out.println("Welcome To Abominodo - The Best Dominoes Puzzle Game in the Universe");
         System.out.println("Version 2.1 (c), Kevan Buckley, 2014");
 //    System.out.println("Serial number " + Special.getStamp());
-    }
-
-    private void generateDominoes() {
-
-        dominoes = new LinkedList<Domino>();
-        int count = 0;
-        int x = 0;
-        int y = 0;
-        for (int l = 0; l <= 6; l++) {
-            for (int h = l; h <= 6; h++) {
-                Domino d = new Domino(h, l);
-                dominoes.add(d);
-                d.place(x, y, x + 1, y);
-                count++;
-                x += 2;
-                if (x > 6) {
-                    x = 0;
-                    y++;
-                }
-            }
-        }
-        if (count != SET_OF_DOMINOES) {
-            System.out.println("something went wrong generating dominoes");
-            System.exit(0);
-        }
     }
 
     private void generateGuesses() {
@@ -778,59 +740,6 @@ public class Main {
             System.out.println();
         }
         return 11;
-    }
-
-    private void shuffleDominoesOrder() {
-        List<Domino> shuffled = new LinkedList<Domino>();
-
-        while (dominoes.size() > 0) {
-            int n = (int) (Math.random() * dominoes.size());
-            shuffled.add(dominoes.get(n));
-            dominoes.remove(n);
-        }
-
-        dominoes = shuffled;
-    }
-
-    private void invertSomeDominoes() {
-        for (Domino d : dominoes) {
-            if (Math.random() > 0.5) {
-                d.invert();
-            }
-        }
-    }
-
-    private void placeDominoes() {
-        int x = 0;
-        int y = 0;
-        int count = 0;
-        for (Domino d : dominoes) {
-            count++;
-            d.place(x, y, x + 1, y);
-            x += 2;
-            if (x > 6) {
-                x = 0;
-                y++;
-            }
-        }
-        if (count != SET_OF_DOMINOES) {
-            System.out.println("something went wrong generating dominoes");
-            System.exit(0);
-        }
-    }
-
-    private void rotateDominoes() {
-        for (Domino d : dominoes) {
-            if (Math.random() > 0.5) {
-                System.out.println("rotating " + d);
-            }
-        }
-        for (int x = 0; x < NUMBER_ROW; x++) {
-            for (int y = 0; y < 6; y++) {
-
-                tryToRotateDominoAt(x, y);
-            }
-        }
     }
 
     private void tryToRotateDominoAt(int x, int y) {
@@ -972,6 +881,123 @@ public class Main {
     public void drawGuesses(Graphics g) {
         for (Domino d : guessDominoes) {
             pf.dp.drawDomino(g, d);
+        }
+    }
+
+    private class FindDifficulty {
+
+        private int difficulty;
+
+        public FindDifficulty(int difficulty) {
+            this.difficulty = difficulty;
+        }
+
+        public void invoke() {
+            switch (difficulty) {
+                case 1:
+                    generateDominoes();
+                    shuffleDominoesOrder();
+                    placeDominoes();
+                    collateGrid();
+                    // printGrid();
+                    break;
+                case 2:
+                    generateDominoes();
+                    shuffleDominoesOrder();
+                    placeDominoes();
+                    rotateDominoes();
+                    collateGrid();
+                    // printGrid();
+                    break;
+                default:
+                    generateDominoes();
+                    shuffleDominoesOrder();
+                    placeDominoes();
+                    rotateDominoes();
+                    rotateDominoes();
+                    rotateDominoes();
+                    invertSomeDominoes();
+                    collateGrid();
+                    break;
+            }
+        }
+
+        private void generateDominoes() {
+
+            dominoes = new LinkedList<Domino>();
+            int count = 0;
+            int x = 0;
+            int y = 0;
+            for (int l = 0; l <= 6; l++) {
+                for (int h = l; h <= 6; h++) {
+                    Domino d = new Domino(h, l);
+                    dominoes.add(d);
+                    d.place(x, y, x + 1, y);
+                    count++;
+                    x += 2;
+                    if (x > 6) {
+                        x = 0;
+                        y++;
+                    }
+                }
+            }
+            if (count != SET_OF_DOMINOES) {
+                System.out.println("something went wrong generating dominoes");
+                System.exit(0);
+            }
+        }
+
+        private void shuffleDominoesOrder() {
+            List<Domino> shuffled = new LinkedList<Domino>();
+
+            while (dominoes.size() > 0) {
+                int n = (int) (Math.random() * dominoes.size());
+                shuffled.add(dominoes.get(n));
+                dominoes.remove(n);
+            }
+
+            dominoes = shuffled;
+        }
+
+        private void placeDominoes() {
+            int x = 0;
+            int y = 0;
+            int count = 0;
+            for (Domino d : dominoes) {
+                count++;
+                d.place(x, y, x + 1, y);
+                x += 2;
+                if (x > 6) {
+                    x = 0;
+                    y++;
+                }
+            }
+            if (count != SET_OF_DOMINOES) {
+                System.out.println("something went wrong generating dominoes");
+                System.exit(0);
+            }
+        }
+
+        private void rotateDominoes() {
+            for (Domino d : dominoes) {
+                if (Math.random() > 0.5) {
+                    System.out.println("rotating " + d);
+                }
+            }
+            for (int x = 0; x < NUMBER_ROW; x++) {
+                for (int y = 0; y < 6; y++) {
+
+                    tryToRotateDominoAt(x, y);
+                }
+            }
+        }
+
+        private void invertSomeDominoes() {
+            for (Domino d : dominoes) {
+                if (Math.random() > 0.5) {
+                    d.invert();
+                }
+            }
         }
     }
     //1817933
