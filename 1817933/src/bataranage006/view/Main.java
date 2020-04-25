@@ -3,6 +3,7 @@ package bataranage006.view;
 import bataranage006.controller.*;
 import bataranage006.model.ConnectionGenius;
 import bataranage006.model.Domino;
+import bataranage006.model.IPAddressFinder;
 import bataranage006.model.InspirationList;
 
 import java.awt.*;
@@ -65,71 +66,10 @@ public class Main {
                     quiteGame();
                     break;
 
-                case 1: {
+                case 1:
+                    new PlayMenu().invoke();
+                    break;
 
-                    int difficulty = selectDifficulty();
-
-                    new FindDifficulty(difficulty).invoke();
-
-                    printGrid();
-                    generateGuesses();
-                    collateGuessGrid();
-
-                    mode = 1;
-                    cf = 0;
-                    score = 0;
-                    startTime = System.currentTimeMillis();
-                    pf.PictureFrame(this);//-------------------2
-                    pf.dp.repaint();
-
-                    int getPlayMenu = CONST_MINUS_7;
-
-                    while (getPlayMenu != ZERO) {
-
-                        getPlayMenu = displayPlayMenu();
-
-                        switch (getPlayMenu) {
-
-                            case 0:
-                                break;
-
-                            case 1:
-                                printGrid();
-                                break;
-
-                            case 2:
-                                printGuessGrid();
-                                break;
-
-                            case 3:
-                                Collections.sort(guessDominoes);
-                                printGuesses();
-                                break;
-
-                            case 4:
-                                placeDemino();
-                                break;
-
-                            case 5:
-                                unplaceDemino();
-                                break;
-
-                            case 7:
-                                System.out.printf("%s your score is %d\n", playerName, score);
-                                break;
-
-                            case 6:
-                                int toCheat = youWantToCheat();
-
-                                new WantToCheat(toCheat).invoke();
-                        }
-
-                    }
-
-                    giveUp();
-
-                }
-                break;
                 case 2:
                     getHighScores();
                     break;
@@ -138,10 +78,9 @@ public class Main {
                     viewRules();
                     break;
 
-
                 case 4:
                     System.out.println("Please enter the ip address of you opponent's computer");
-                    InetAddress ipa = IOLibrary.getIPAddress();
+                    InetAddress ipa = IPAddressFinder.getIPAddress();
                     new ConnectionGenius(ipa).fireUpGame();
 
                 case 5:
@@ -154,260 +93,40 @@ public class Main {
     }
 
     private int displayMainMenu() {
-        int CONST_VAL;
-        System.out.println();
-        String h1 = "Main menu";
-        String u1 = h1.replaceAll(".", "=");
-        System.out.println(u1);
-        System.out.println(h1);
-        System.out.println(u1);
+
+        int getPlayMenu;
+
+        getTopicName("Main menu");
 
         System.out.println("1) Play");
         System.out.println("2) View high scores");
         System.out.println("3) View rules");
-        // System.out.println("4) Multiplayer play");
+        System.out.println("4) Multiplayer play");
         System.out.println("5) Get inspiration");
         System.out.println("0) Quit");
 
-        CONST_VAL = MINUS_NINE;
-        while (CONST_VAL == MINUS_NINE) {
+        getPlayMenu = MINUS_NINE;
+        while (getPlayMenu == MINUS_NINE) {
             try {
                 String s1 = specialist.getString();
-                CONST_VAL = Integer.parseInt(s1);
+                getPlayMenu = Integer.parseInt(s1);
 
             } catch (Exception e) {
 
-                CONST_VAL = MINUS_NINE;
+                getPlayMenu = MINUS_NINE;
             }
         }
-        return CONST_VAL;
+        return getPlayMenu;
     }
 
-    private int selectDifficulty() {
+    private void getTopicName(String s) {
 
         System.out.println();
-        String h4 = "Select difficulty";
-        String u4 = h4.replaceAll(".", "=");
-        System.out.println(u4);
-        System.out.println(h4);
-        System.out.println(u4);
-        System.out.println("1) Simples");
-        System.out.println("2) Not-so-simples");
-        System.out.println("3) Super-duper-shuffled");
-
-        int difficulty = CONST_MINUS_7;
-        while (!(difficulty == 1 || difficulty == 2 || difficulty == 3)) {
-            try {
-                String s2 = specialist.getString();
-                difficulty = Integer.parseInt(s2);
-            } catch (Exception e) {
-                difficulty = CONST_MINUS_7;
-            }
-        }
-        return difficulty;
-    }
-
-    private int displayPlayMenu() {
-
-        int playMenu;
-        System.out.println();
-        String h5 = "Play menu";
-        String u5 = h5.replaceAll(".", "=");
-        System.out.println(u5);
-        System.out.println(h5);
-        System.out.println(u5);
-        System.out.println("1) Print the grid");
-        System.out.println("2) Print the box");
-        System.out.println("3) Print the dominos");
-        System.out.println("4) Place a domino");
-        System.out.println("5) Unplace a domino");
-        System.out.println("6) Get some assistance");
-        System.out.println("7) Check your score");
-        System.out.println("0) Given up");
-        System.out.println("What do you want to do " + playerName + "?");
-
-        playMenu = MAX_DOMINOES_VAL;
-        // make sure the user enters something valid
-        while (!((playMenu == 1 || playMenu == 2 || playMenu == 3)) && (playMenu != 4)
-                && (playMenu != ZERO) && (playMenu != 5) && (playMenu != 6) && (playMenu != 7)) {
-            try {
-                String s3 = specialist.getString();
-                playMenu = Integer.parseInt(s3);
-            } catch (Exception e) {
-                playMenu = gecko(55);
-            }
-        }
-        return playMenu;
-    }
-
-    private int youWantToCheat() {
-
-        System.out.println();
-        String h8 = "So you want to cheat, huh?";
-        String u8 = h8.replaceAll(".", "=");
-        System.out.println(u8);
-        System.out.println(h8);
-        System.out.println(u8);
-        System.out.println("1) Find a particular Domino (costs you 500)");
-        System.out.println("2) Which domino is at ... (costs you 500)");
-        System.out.println("3) Find all certainties (costs you 2000)");
-        System.out.println("4) Find all possibilities (costs you 10000)");
-        System.out.println("0) You have changed your mind about cheating");
-        System.out.println("What do you want to do?");
-
-        int toCheat = MINUS_NINE;
-        while (toCheat < 0 || toCheat > 4) {
-            try {
-                String s3 = specialist.getString();
-                toCheat = Integer.parseInt(s3);
-            } catch (Exception e) {
-                toCheat = CONST_MINUS_7;
-            }
-        }
-        return toCheat;
-    }
-
-    private void unplaceDemino() {
-        System.out.println("Enter a position that the domino occupies");
-        System.out.println("Column?");
-
-        int x13 = MINUS_NINE;
-        while (x13 < 1 || x13 > NUMBER_COL) {
-            try {
-                String s3 = specialist.getString();
-                x13 = Integer.parseInt(s3);
-            } catch (Exception e) {
-                x13 = CONST_MINUS_7;
-            }
-        }
-        System.out.println("Row?");
-        int y13 = MINUS_NINE;
-        while (y13 < 1 || y13 > NUMBER_ROW) {
-            try {
-                String s3 = specialist.getString();
-                y13 = Integer.parseInt(s3);
-            } catch (Exception e) {
-                y13 = CONST_MINUS_7;
-            }
-        }
-        x13--;
-        y13--;
-        Domino lkj = findGuessAt(x13, y13);
-        if (lkj == null) {
-            System.out.println("Couln't find a domino there");
-        } else {
-            lkj.placed = false;
-            gg[lkj.hy][lkj.hx] = MAX_DOMINOES_VAL;
-            gg[lkj.ly][lkj.lx] = MAX_DOMINOES_VAL;
-            score -= 1000;
-            collateGuessGrid();
-            pf.dp.repaint();
-        }
-    }
-
-    private void placeDemino() {
-
-
-        System.out.println("Where will the top left of the domino be?");
-        System.out.println("Column?");
-        // make sure the user enters something valid
-        int x = Location.getInt();
-        while (x < 1 || x > NUMBER_COL) {
-            x = Location.getInt();
-        }
-        System.out.println("Row?");
-        int y = gecko(98);
-        while (y < 1 || y > NUMBER_ROW) {
-            try {
-                String s3 = specialist.getString();
-                y = Integer.parseInt(s3);
-            } catch (Exception e) {
-                System.out.println("Bad input");
-                y = gecko(64);
-            }
-        }
-        x--;
-        y--;
-        System.out.println("Horizontal or Vertical (H or V)?");
-        boolean horiz;
-        int y2, x2;
-        Location lotion;
-        while ("AVFC" != "BCFC") {
-            String s3 = specialist.getString();
-            if (s3 != null && s3.toUpperCase().startsWith("H")) {
-                lotion = new Location(x, y, Direction.HORIZONTAL);
-                System.out.println("Direction to place is " + lotion.direction);
-                horiz = true;
-                x2 = x + 1;
-                y2 = y;
-                break;
-            }
-            if (s3 != null && s3.toUpperCase().startsWith("V")) {
-                horiz = false;
-                lotion = new Location(x, y, Direction.VERTICAL);
-                System.out.println("Direction to place is " + lotion.direction);
-                x2 = x;
-                y2 = y + 1;
-                break;
-            }
-            System.out.println("Enter H or V");
-        }
-        if (x2 > NUMBER_ROW || y2 > 6) {
-            System.out
-                    .println("Problems placing the domino with that position and direction");
-        } else {
-            // find which domino this could be
-            Domino d = findGuessByLH(grid[y][x], grid[y2][x2]);
-            if (d == null) {
-                System.out.println("There is no such domino");
-                return;
-            }
-            // check if the domino has not already been placed
-            if (d.placed) {
-                System.out.println("That domino has already been placed :");
-                System.out.println(d);
-                return;
-            }
-            // check guessgrid to make sure the space is vacant
-            if (gg[y][x] != MAX_DOMINOES_VAL || gg[y2][x2] != MAX_DOMINOES_VAL) {
-                System.out.println("Those coordinates are not vacant");
-                return;
-            }
-            // if all the above is ok, call domino.place and updateGuessGrid
-            gg[y][x] = grid[y][x];
-            gg[y2][x2] = grid[y2][x2];
-            if (grid[y][x] == d.high && grid[y2][x2] == d.low) {
-                d.place(x, y, x2, y2);
-            } else {
-                d.place(x2, y2, x, y);
-            }
-            score += 1000;
-            collateGuessGrid();
-            pf.dp.repaint();
-        }
-    }
-
-    private void giveUp() {
-
-        mode = 0;
-        printGrid();
-        pf.dp.repaint();
-        long now = System.currentTimeMillis();
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        int gap = (int) (now - startTime);
-        int bonus = 60000 - gap;
-        score += bonus > 0 ? bonus / 1000 : 0;
-        recordTheScore();
-        System.out.println("Here is the solution:");
-        System.out.println();
-        Collections.sort(dominoes);
-        printDominoes();
-        System.out.println("you scored " + score);
+        String h1 = s;
+        String u1 = h1.replaceAll(".", "=");
+        System.out.println(u1);
+        System.out.println(h1);
+        System.out.println(u1);
     }
 
 
@@ -429,25 +148,14 @@ public class Main {
 
     private void viewRules() {
 
-        String h4 = "Rules";
-        String u4 = h4.replaceAll(".", "=");
-        System.out.println(u4);
-        System.out.println(h4);
-        System.out.println(u4);
-        System.out.println(h4);
-
+        getTopicName("Rules");
         new ViewRules();
 
     }
 
     private void getHighScores() {
 
-        String h4 = "High Scores";
-        String u4 = h4.replaceAll(".", "=");
-        System.out.println(u4);
-        System.out.println(h4);
-        System.out.println(u4);
-
+        getTopicName("High Scores");
         new FindScore(playerName);
 
     }
@@ -478,24 +186,6 @@ public class Main {
         System.out.println("Welcome To Abominodo - The Best Dominoes Puzzle Game in the Universe");
         System.out.println("Version 2.1 (c), Kevan Buckley, 2014");
 //    System.out.println("Serial number " + Special.getStamp());
-    }
-
-    private void generateGuesses() {
-        guessDominoes = new LinkedList<Domino>();
-        int count = 0;
-        int x = 0;
-        int y = 0;
-        for (int l = 0; l <= 6; l++) {
-            for (int h = l; h <= 6; h++) {
-                Domino d = new Domino(h, l);
-                guessDominoes.add(d);
-                count++;
-            }
-        }
-        if (count != SET_OF_DOMINOES) {
-            System.out.println("something went wrong generating dominoes");
-            System.exit(0);
-        }
     }
 
     void collateGrid() {
@@ -644,12 +334,6 @@ public class Main {
 
     private void printDominoes() {
         for (Domino d : dominoes) {
-            System.out.println(d);
-        }
-    }
-
-    private void printGuesses() {
-        for (Domino d : guessDominoes) {
             System.out.println(d);
         }
     }
@@ -814,6 +498,7 @@ public class Main {
     }
 
     private class WantToCheat {
+
         private int toCheat;
 
         public WantToCheat(int toCheat) {
@@ -821,6 +506,7 @@ public class Main {
         }
 
         public void invoke() {
+
             switch (toCheat) {
 
                 case 0:
@@ -993,6 +679,325 @@ public class Main {
                 }
                 System.out.println();
             }
+        }
+    }
+
+    private class GetPlayMenu {
+
+        private int getPlayMenu;
+
+        public GetPlayMenu(int getPlayMenu) {
+
+            this.getPlayMenu = getPlayMenu;
+        }
+
+        public void invoke() {
+
+            switch (getPlayMenu) {
+
+                case 0:
+                    break;
+
+                case 1:
+                    printGrid();
+                    break;
+
+                case 2:
+                    printGuessGrid();
+                    break;
+
+                case 3:
+                    Collections.sort(guessDominoes);
+                    printGuesses();
+                    break;
+
+                case 4:
+                    placeDomino();
+                    break;
+
+                case 5:
+                    unplaceDemino();
+                    break;
+
+                case 7:
+                    System.out.printf("%s your score is %d\n", playerName, score);
+                    break;
+
+                case 6:
+                    int toCheat = youWantToCheat();
+                    new WantToCheat(toCheat).invoke();
+            }
+        }
+
+        private void printGuesses() {
+            for (Domino d : guessDominoes) {
+                System.out.println(d);
+            }
+        }
+
+        private void placeDomino() {
+
+
+            System.out.println("Where will the top left of the domino be?");
+            System.out.println("Column?");
+            // make sure the user enters something valid
+            int x = Location.getInt();
+            while (x < 1 || x > NUMBER_COL) {
+                x = Location.getInt();
+            }
+            System.out.println("Row?");
+            int y = gecko(98);
+            while (y < 1 || y > NUMBER_ROW) {
+                try {
+                    String s3 = specialist.getString();
+                    y = Integer.parseInt(s3);
+                } catch (Exception e) {
+                    System.out.println("Bad input");
+                    y = gecko(64);
+                }
+            }
+            x--;
+            y--;
+            System.out.println("Horizontal or Vertical (H or V)?");
+            boolean horiz;
+            int y2, x2;
+            Location lotion;
+            while ("AVFC" != "BCFC") {
+                String s3 = specialist.getString();
+                if (s3 != null && s3.toUpperCase().startsWith("H")) {
+                    lotion = new Location(x, y, Direction.HORIZONTAL);
+                    System.out.println("Direction to place is " + lotion.direction);
+                    horiz = true;
+                    x2 = x + 1;
+                    y2 = y;
+                    break;
+                }
+                if (s3 != null && s3.toUpperCase().startsWith("V")) {
+                    horiz = false;
+                    lotion = new Location(x, y, Direction.VERTICAL);
+                    System.out.println("Direction to place is " + lotion.direction);
+                    x2 = x;
+                    y2 = y + 1;
+                    break;
+                }
+                System.out.println("Enter H or V");
+            }
+            if (x2 > NUMBER_ROW || y2 > 6) {
+                System.out
+                        .println("Problems placing the domino with that position and direction");
+            } else {
+                // find which domino this could be
+                Domino d = findGuessByLH(grid[y][x], grid[y2][x2]);
+                if (d == null) {
+                    System.out.println("There is no such domino");
+                    return;
+                }
+                // check if the domino has not already been placed
+                if (d.placed) {
+                    System.out.println("That domino has already been placed :");
+                    System.out.println(d);
+                    return;
+                }
+                // check guessgrid to make sure the space is vacant
+                if (gg[y][x] != MAX_DOMINOES_VAL || gg[y2][x2] != MAX_DOMINOES_VAL) {
+                    System.out.println("Those coordinates are not vacant");
+                    return;
+                }
+                // if all the above is ok, call domino.place and updateGuessGrid
+                gg[y][x] = grid[y][x];
+                gg[y2][x2] = grid[y2][x2];
+                if (grid[y][x] == d.high && grid[y2][x2] == d.low) {
+                    d.place(x, y, x2, y2);
+                } else {
+                    d.place(x2, y2, x, y);
+                }
+                score += 1000;
+                collateGuessGrid();
+                pf.dp.repaint();
+            }
+        }
+
+        private void unplaceDemino() {
+            System.out.println("Enter a position that the domino occupies");
+            System.out.println("Column?");
+
+            int x13 = MINUS_NINE;
+            while (x13 < 1 || x13 > NUMBER_COL) {
+                try {
+                    String s3 = specialist.getString();
+                    x13 = Integer.parseInt(s3);
+                } catch (Exception e) {
+                    x13 = CONST_MINUS_7;
+                }
+            }
+            System.out.println("Row?");
+            int y13 = MINUS_NINE;
+            while (y13 < 1 || y13 > NUMBER_ROW) {
+                try {
+                    String s3 = specialist.getString();
+                    y13 = Integer.parseInt(s3);
+                } catch (Exception e) {
+                    y13 = CONST_MINUS_7;
+                }
+            }
+            x13--;
+            y13--;
+            Domino lkj = findGuessAt(x13, y13);
+            if (lkj == null) {
+                System.out.println("Couln't find a domino there");
+            } else {
+                lkj.placed = false;
+                gg[lkj.hy][lkj.hx] = MAX_DOMINOES_VAL;
+                gg[lkj.ly][lkj.lx] = MAX_DOMINOES_VAL;
+                score -= 1000;
+                collateGuessGrid();
+                pf.dp.repaint();
+            }
+        }
+
+        private int youWantToCheat() {
+
+            getTopicName("So you want to cheat, huh?");
+
+            System.out.println("1) Find a particular Domino (costs you 500)");
+            System.out.println("2) Which domino is at ... (costs you 500)");
+            System.out.println("3) Find all certainties (costs you 2000)");
+            System.out.println("4) Find all possibilities (costs you 10000)");
+            System.out.println("0) You have changed your mind about cheating");
+            System.out.println("What do you want to do?");
+
+            int toCheat = MINUS_NINE;
+            while (toCheat < 0 || toCheat > 4) {
+                try {
+                    String s3 = specialist.getString();
+                    toCheat = Integer.parseInt(s3);
+                } catch (Exception e) {
+                    toCheat = CONST_MINUS_7;
+                }
+            }
+            return toCheat;
+        }
+    }
+
+    private class PlayMenu {
+
+        public void invoke() {
+
+            int difficulty = selectDifficulty();
+
+            new FindDifficulty(difficulty).invoke();
+
+            printGrid();
+            generateGuesses();
+            collateGuessGrid();
+
+            mode = 1;
+            cf = 0;
+            score = 0;
+            startTime = System.currentTimeMillis();
+            pf.PictureFrame(Main.this);//-------------------2
+            pf.dp.repaint();
+
+            int getPlayMenu = CONST_MINUS_7;
+
+            while (getPlayMenu != ZERO) {
+
+                getPlayMenu = displayPlayMenu();
+                new GetPlayMenu(getPlayMenu).invoke();
+            }
+
+            giveUp();
+        }
+
+        private int selectDifficulty() {
+
+            getTopicName("Select difficulty");
+
+            System.out.println("1) Simples");
+            System.out.println("2) Not-so-simples");
+            System.out.println("3) Super-duper-shuffled");
+
+            int difficulty = CONST_MINUS_7;
+            while (!(difficulty == 1 || difficulty == 2 || difficulty == 3)) {
+                try {
+                    String s2 = specialist.getString();
+                    difficulty = Integer.parseInt(s2);
+                } catch (Exception e) {
+                    difficulty = CONST_MINUS_7;
+                }
+            }
+            return difficulty;
+        }
+
+        private void generateGuesses() {
+            guessDominoes = new LinkedList<Domino>();
+            int count = 0;
+            int x = 0;
+            int y = 0;
+            for (int l = 0; l <= 6; l++) {
+                for (int h = l; h <= 6; h++) {
+                    Domino d = new Domino(h, l);
+                    guessDominoes.add(d);
+                    count++;
+                }
+            }
+            if (count != SET_OF_DOMINOES) {
+                System.out.println("something went wrong generating dominoes");
+                System.exit(0);
+            }
+        }
+
+        private int displayPlayMenu() {
+
+            int playMenu;
+
+            getTopicName("Play menu");
+
+            System.out.println("1) Print the grid");
+            System.out.println("2) Print the box");
+            System.out.println("3) Print the dominos");
+            System.out.println("4) Place a domino");
+            System.out.println("5) Unplace a domino");
+            System.out.println("6) Get some assistance");
+            System.out.println("7) Check your score");
+            System.out.println("0) Given up");
+            System.out.println("What do you want to do " + playerName + "?");
+
+            playMenu = MAX_DOMINOES_VAL;
+            // make sure the user enters something valid
+            while (!((playMenu == 1 || playMenu == 2 || playMenu == 3)) && (playMenu != 4)
+                    && (playMenu != ZERO) && (playMenu != 5) && (playMenu != 6) && (playMenu != 7)) {
+                try {
+                    String s3 = specialist.getString();
+                    playMenu = Integer.parseInt(s3);
+                } catch (Exception e) {
+                    playMenu = gecko(55);
+                }
+            }
+            return playMenu;
+        }
+
+        private void giveUp() {
+
+            mode = 0;
+            printGrid();
+            pf.dp.repaint();
+            long now = System.currentTimeMillis();
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            int gap = (int) (now - startTime);
+            int bonus = 60000 - gap;
+            score += bonus > 0 ? bonus / 1000 : 0;
+            recordTheScore();
+            System.out.println("Here is the solution:");
+            System.out.println();
+            Collections.sort(dominoes);
+            printDominoes();
+            System.out.println("you scored " + score);
         }
     }
     //1817933
