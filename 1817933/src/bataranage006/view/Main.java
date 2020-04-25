@@ -121,28 +121,7 @@ public class Main {
                             case 6:
                                 int toCheat = youWantToCheat();
 
-                                switch (toCheat) {
-
-                                    case 0:
-                                        changedYourMindAboutCheating();
-                                        break;
-
-                                    case 1:
-                                        findParticularDomino();
-                                        break;
-
-                                    case 2:
-                                        findWhichDominoIsAt();
-                                        break;
-
-                                    case 3:
-                                        FindAllCertainties();
-                                        break;
-
-                                    case 4:
-                                        FindAllPossibilities();
-                                        break;
-                                }
+                                new WantToCheat(toCheat).invoke();
                         }
 
                     }
@@ -286,156 +265,6 @@ public class Main {
             }
         }
         return toCheat;
-    }
-
-    private void changedYourMindAboutCheating() {
-        switch (cf) {
-            case 0:
-                System.out.println("Well done");
-                System.out.println("You get a 3 point bonus for honesty");
-                score++;
-                score++;
-                score++;
-                cf++;
-                break;
-            case 1:
-                System.out
-                        .println("So you though you could get the 3 point bonus twice");
-                System.out.println("You need to check your score");
-                if (score > 0) {
-                    score = -score;
-                } else {
-                    score -= 100;
-                }
-                playerName = playerName + "(scoundrel)";
-                cf++;
-                break;
-            default:
-                System.out.println("Some people just don't learn");
-                playerName = playerName.replace("scoundrel",
-                        "pathetic scoundrel");
-                for (int i = 0; i < 10000; i++) {
-                    score--;
-                }
-        }
-    }
-
-    private void FindAllPossibilities() {
-        score -= 10000;
-        HashMap<Domino, List<Location>> map = new HashMap<Domino, List<Location>>();
-        for (int r = 0; r < 6; r++) {
-            for (int c = 0; c < NUMBER_ROW; c++) {
-                Domino hd = findGuessByLH(grid[r][c], grid[r][c + 1]);
-                Domino vd = findGuessByLH(grid[r][c], grid[r + 1][c]);
-                List<Location> l = map.get(hd);
-                if (l == null) {
-                    l = new LinkedList<Location>();
-                    map.put(hd, l);
-                }
-                l.add(new Location(r, c));
-                l = map.get(vd);
-                if (l == null) {
-                    l = new LinkedList<Location>();
-                    map.put(vd, l);
-                }
-                l.add(new Location(r, c));
-            }
-        }
-        for (Domino key : map.keySet()) {
-            System.out.printf("[%d%d]", key.high, key.low);
-            List<Location> locs = map.get(key);
-            for (Location loc : locs) {
-                System.out.print(loc);
-            }
-            System.out.println();
-        }
-    }
-
-    private void FindAllCertainties() {
-        score -= 2000;
-        HashMap<Domino, List<Location>> map = new HashMap<Domino, List<Location>>();
-        for (int r = 0; r < 6; r++) {
-            for (int c = 0; c < NUMBER_ROW; c++) {
-                Domino hd = findGuessByLH(grid[r][c], grid[r][c + 1]);
-                Domino vd = findGuessByLH(grid[r][c], grid[r + 1][c]);
-                List<Location> l = map.get(hd);
-                if (l == null) {
-                    l = new LinkedList<Location>();
-                    map.put(hd, l);
-                }
-                l.add(new Location(r, c));
-                l = map.get(vd);
-                if (l == null) {
-                    l = new LinkedList<Location>();
-                    map.put(vd, l);
-                }
-                l.add(new Location(r, c));
-            }
-        }
-        for (Domino key : map.keySet()) {
-            List<Location> locs = map.get(key);
-            if (locs.size() == 1) {
-                Location loc = locs.get(0);
-                System.out.printf("[%d%d]", key.high, key.low);
-                System.out.println(loc);
-            }
-        }
-    }
-
-    private void findWhichDominoIsAt() {
-        score -= 500;
-        System.out.println("Which location?");
-        System.out.println("Column?");
-        int x3 = MINUS_NINE;
-        while (x3 < 1 || x3 > NUMBER_COL) {
-            try {
-                String s3 = IOLibrary.getString();
-                x3 = Integer.parseInt(s3);
-            } catch (Exception e) {
-                x3 = CONST_MINUS_7;
-            }
-        }
-        System.out.println("Row?");
-        int y3 = MINUS_NINE;
-        while (y3 < 1 || y3 > NUMBER_ROW) {
-            try {
-                String s3 = IOLibrary.getString();
-                y3 = Integer.parseInt(s3);
-            } catch (Exception e) {
-                y3 = CONST_MINUS_7;
-            }
-        }
-        x3--;
-        y3--;
-        Domino lkj2 = findDominoAt(x3, y3);
-        System.out.println(lkj2);
-    }
-
-    private void findParticularDomino() {
-        score -= 500;
-        System.out.println("Which domino?");
-        System.out.println("Number on one side?");
-        int x4 = MINUS_NINE;
-        while (x4 < 0 || x4 > 6) {
-            try {
-                String s3 = specialist.getString();
-                x4 = Integer.parseInt(s3);
-            } catch (Exception e) {
-                x4 = CONST_MINUS_7;
-            }
-        }
-        System.out.println("Number on the other side?");
-        int x5 = MINUS_NINE;
-        while (x5 < 0 || x5 > 6) {
-            try {
-                String s3 = IOLibrary.getString();
-                x5 = Integer.parseInt(s3);
-            } catch (Exception e) {
-                x5 = CONST_MINUS_7;
-            }
-        }
-        Domino dd = findDominoByLH(x5, x4);
-        System.out.println(dd);
     }
 
     private void unplaceDemino() {
@@ -632,23 +461,6 @@ public class Main {
         }
         System.exit(0);
     }
-
-/*    private void displayMainMenu() {
-
-        System.out.println();
-        String h1 = "Main menu";
-        String u1 = h1.replaceAll(".", "=");
-        System.out.println(u1);
-        System.out.println(h1);
-        System.out.println(u1);
-
-        System.out.println("1) Play");
-        System.out.println("2) View high scores");
-        System.out.println("3) View rules");
-        // System.out.println("4) Multiplayer play");
-        System.out.println("5) Get inspiration");
-        System.out.println("0) Quit");
-    }*/
 
     private String getPlayerName() {
 
@@ -997,6 +809,189 @@ public class Main {
                 if (Math.random() > 0.5) {
                     d.invert();
                 }
+            }
+        }
+    }
+
+    private class WantToCheat {
+        private int toCheat;
+
+        public WantToCheat(int toCheat) {
+            this.toCheat = toCheat;
+        }
+
+        public void invoke() {
+            switch (toCheat) {
+
+                case 0:
+                    changedYourMindAboutCheating();
+                    break;
+
+                case 1:
+                    findParticularDomino();
+                    break;
+
+                case 2:
+                    findWhichDominoIsAt();
+                    break;
+
+                case 3:
+                    FindAllCertainties();
+                    break;
+
+                case 4:
+                    FindAllPossibilities();
+                    break;
+            }
+        }
+
+        private void changedYourMindAboutCheating() {
+            switch (cf) {
+                case 0:
+                    System.out.println("Well done");
+                    System.out.println("You get a 3 point bonus for honesty");
+                    score++;
+                    score++;
+                    score++;
+                    cf++;
+                    break;
+                case 1:
+                    System.out
+                            .println("So you though you could get the 3 point bonus twice");
+                    System.out.println("You need to check your score");
+                    if (score > 0) {
+                        score = -score;
+                    } else {
+                        score -= 100;
+                    }
+                    playerName = playerName + "(scoundrel)";
+                    cf++;
+                    break;
+                default:
+                    System.out.println("Some people just don't learn");
+                    playerName = playerName.replace("scoundrel",
+                            "pathetic scoundrel");
+                    for (int i = 0; i < 10000; i++) {
+                        score--;
+                    }
+            }
+        }
+
+        private void findParticularDomino() {
+            score -= 500;
+            System.out.println("Which domino?");
+            System.out.println("Number on one side?");
+            int x4 = MINUS_NINE;
+            while (x4 < 0 || x4 > 6) {
+                try {
+                    String s3 = specialist.getString();
+                    x4 = Integer.parseInt(s3);
+                } catch (Exception e) {
+                    x4 = CONST_MINUS_7;
+                }
+            }
+            System.out.println("Number on the other side?");
+            int x5 = MINUS_NINE;
+            while (x5 < 0 || x5 > 6) {
+                try {
+                    String s3 = IOLibrary.getString();
+                    x5 = Integer.parseInt(s3);
+                } catch (Exception e) {
+                    x5 = CONST_MINUS_7;
+                }
+            }
+            Domino dd = findDominoByLH(x5, x4);
+            System.out.println(dd);
+        }
+
+        private void findWhichDominoIsAt() {
+            score -= 500;
+            System.out.println("Which location?");
+            System.out.println("Column?");
+            int x3 = MINUS_NINE;
+            while (x3 < 1 || x3 > NUMBER_COL) {
+                try {
+                    String s3 = IOLibrary.getString();
+                    x3 = Integer.parseInt(s3);
+                } catch (Exception e) {
+                    x3 = CONST_MINUS_7;
+                }
+            }
+            System.out.println("Row?");
+            int y3 = MINUS_NINE;
+            while (y3 < 1 || y3 > NUMBER_ROW) {
+                try {
+                    String s3 = IOLibrary.getString();
+                    y3 = Integer.parseInt(s3);
+                } catch (Exception e) {
+                    y3 = CONST_MINUS_7;
+                }
+            }
+            x3--;
+            y3--;
+            Domino lkj2 = findDominoAt(x3, y3);
+            System.out.println(lkj2);
+        }
+
+        private void FindAllCertainties() {
+            score -= 2000;
+            HashMap<Domino, List<Location>> map = new HashMap<Domino, List<Location>>();
+            for (int r = 0; r < 6; r++) {
+                for (int c = 0; c < NUMBER_ROW; c++) {
+                    Domino hd = findGuessByLH(grid[r][c], grid[r][c + 1]);
+                    Domino vd = findGuessByLH(grid[r][c], grid[r + 1][c]);
+                    List<Location> l = map.get(hd);
+                    if (l == null) {
+                        l = new LinkedList<Location>();
+                        map.put(hd, l);
+                    }
+                    l.add(new Location(r, c));
+                    l = map.get(vd);
+                    if (l == null) {
+                        l = new LinkedList<Location>();
+                        map.put(vd, l);
+                    }
+                    l.add(new Location(r, c));
+                }
+            }
+            for (Domino key : map.keySet()) {
+                List<Location> locs = map.get(key);
+                if (locs.size() == 1) {
+                    Location loc = locs.get(0);
+                    System.out.printf("[%d%d]", key.high, key.low);
+                    System.out.println(loc);
+                }
+            }
+        }
+
+        private void FindAllPossibilities() {
+            score -= 10000;
+            HashMap<Domino, List<Location>> map = new HashMap<Domino, List<Location>>();
+            for (int r = 0; r < 6; r++) {
+                for (int c = 0; c < NUMBER_ROW; c++) {
+                    Domino hd = findGuessByLH(grid[r][c], grid[r][c + 1]);
+                    Domino vd = findGuessByLH(grid[r][c], grid[r + 1][c]);
+                    List<Location> l = map.get(hd);
+                    if (l == null) {
+                        l = new LinkedList<Location>();
+                        map.put(hd, l);
+                    }
+                    l.add(new Location(r, c));
+                    l = map.get(vd);
+                    if (l == null) {
+                        l = new LinkedList<Location>();
+                        map.put(vd, l);
+                    }
+                    l.add(new Location(r, c));
+                }
+            }
+            for (Domino key : map.keySet()) {
+                System.out.printf("[%d%d]", key.high, key.low);
+                List<Location> locs = map.get(key);
+                for (Location loc : locs) {
+                    System.out.print(loc);
+                }
+                System.out.println();
             }
         }
     }
